@@ -8,34 +8,25 @@ package
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	
 	/**
-	 * PADDLE
+	 * Ship
 	 * @author ...
 	 */
 	public class Ship extends FlxSprite 
 	{
 		[Embed(source = '../assets/gfx/ship.png')] public var ImgShip:Class;
 		
-		public var shipwidth:int = 90;
-		public var shipheight:int = 90;
-		public var xpos:int = 0;
-		public var ypox:int = 0;
-		private static var coefficient1:Number = Math.PI / 4;
- 
 		public function Ship() 
 		{
 			super(FlxG.width / 2, FlxG.height - 100, ImgShip);
 			immovable = true;
-			acceleration.x = 10;
-			acceleration.y = 10;
-			maxVelocity.x = 200;
-			maxVelocity.y = 200;
 		}
 		
+		/*
 		override public function update():void
 		{
 		}
 		
-		/*public function deplacement():void {
+		public function deplacement():void {
 			// Déplacement souris
 			FlxG.mouse.show();
 			

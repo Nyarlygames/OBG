@@ -19,11 +19,9 @@ package
 		
 		public function Tir(ship:Ship) 
 		{
-			var tox:int = FlxG.mouse.x - (ship.x+ship.shipwidth/2);
-			var toy:int = FlxG.mouse.y - (ship.y+ship.shipheight/2);
-			xpos = ship.x + ship.shipwidth / 2;
-			ypos = ship.y + ship.shipheight / 2;
-			super(xpos, ypos, ImgTir);
+			var tox:int = FlxG.mouse.x - (ship.x+ship.frameWidth/2);
+			var toy:int = FlxG.mouse.y - (ship.y+ship.frameHeight/2);
+			super(ship.x + ship.frameWidth / 2, ship.y + ship.frameHeight / 2, ImgTir);
 			maxVelocity.x = 700;
 			maxVelocity.y = 700;
 			acceleration.x = tox;

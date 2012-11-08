@@ -17,6 +17,7 @@ package
 	{	
 		// VARIABLES DE PLAYSTATE
 		public var ship:Ship;
+		public var area:Area;
 		public var tirs:FlxGroup;
 		public var maxtir:int = 50000;
 		public var tir:Tir;
@@ -33,6 +34,8 @@ package
 			FlxG.bgColor = 0xaa519CCA;
 			// AJOUT DES OBJETS
 			ship = new Ship();
+			area = new Area(ship);
+			add(area);
 			add(ship);
 			cur = new Cursor();
 			add(cur);
@@ -41,8 +44,6 @@ package
 			FlxG.mouse.show();
 			time.setFormat(null, 12, 0x044071);
 			add(time);
-			//INITIALISATION TABLEAU DES MISSILES
-			trace(tirs);
 			
 		}
 		
@@ -52,21 +53,29 @@ package
 		override public function update():void
 		{	
 			super.update();
+			area.sticktoship(ship);
 			count++;
 			time.text = "Tirs : " + tirscount.toString();
-			cur.x = FlxG.mouse.x;
-			cur.y = FlxG.mouse.y;
+			cur.x = FlxG.mouse.x - cur.frameWidth/2;
+			cur.y = FlxG.mouse.y - cur.frameHeight/2;
 			if (tirscount < maxtir) {
 				tirs.add(new Tir(ship));
 				tirscount++;
 			}
-			
-			to.x = FlxG.mouse.x - (ship.x + ship.shipwidth/2);
-			to.y = FlxG.mouse.y - (ship.y + ship.shipheight / 2);
-			trace(to.x, to.y);
-			if ((to.x > 40) && (to.y > 40) || (to.x < -40) && (to.y < -40))
-				FlxVelocity.moveTowardsObject(ship, cur, 10);
-			FlxVelocity.moveTowardsObject(ship, cur, 500);
+			to.x = FlxG.mouse.x - (ship.x + ship.frameWidth/2);
+			to.y = FlxG.mouse.y - (ship.y + ship.frameHeight / 2);
+			if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
+				(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
+					FlxVelocity.moveTowardsMouse(ship,300);
+				}
+			else if (FlxG.collide(ship, cur)) {
+				ship.velocity.x = 0;
+				ship.velocity.y = 0;
+			}
+			else {
+				FlxVelocity.moveTowardsMouse(ship, 50);
+			}
+				
 			/*
 			for (var m:int = 0; m < maxtirs; m++) {
 				// COLLISION DES TIRS
