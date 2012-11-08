@@ -16,15 +16,12 @@ package
 	{	
 		// VARIABLES DE PLAYSTATE
 		public var paddle:Paddle;
-		public var shoot:Launcher;
-		public var shootactive:Boolean = false;
-		public var shootexist:Boolean = false;
-		public var missilescount:int = 0;
-		public var missiles:Array = new Array(50);
-		public var missileexist:Boolean = false;
-		public var maxmissiles:int = 50;
-		public var missile:FlxSprite;
+		public var tirs:FlxGroup;
+		public var maxtir:int = 50000;
 		public var tir:Tir;
+		public var tirscount:int = 0;
+		public var count:int = 0;
+		public var time:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + count.toString());
 		
 		/**
 		 * CREATION DU JEU
@@ -35,11 +32,12 @@ package
 			// AJOUT DES OBJETS
 			paddle = new Paddle();
 			add(paddle);
-			/*
-			// INITIALISATION TABLEAU DES MISSILES
-			for (var z:int; z < maxrow; z++) {
-				missiles[z] = null;
-			}*/
+			tirs = new FlxGroup;
+			add(tirs);
+			time.setFormat(null, 12, 0x044071);
+			add(time);
+			//INITIALISATION TABLEAU DES MISSILES
+			trace(tirs);
 			
 		}
 		
@@ -49,20 +47,13 @@ package
 		override public function update():void
 		{	
 			super.update();
+			count++;
+			time.text = "Temps : " + count.toString();
 			/*
-			// ATTRAPER BONUS SHOOT
-			if (FlxG.overlap(paddle, shoot)) {
-				shoot.kill();
-				missile = new FlxSprite(paddle.x - paddle.padwidth / 2 - 15, paddle.y - 20, ImgLauncher);
-				add(missile);
-				shootactive = true;
-				shootexist = false;
-			}
-			
-			for (var m:int = 0; m < maxmissiles; m++) {
-				// COLLISION DES MISSILES
-				if (missiles[m] != null) 
-					FlxG.collide(missiles[m], destBlock, hitblock);
+			for (var m:int = 0; m < maxtirs; m++) {
+				// COLLISION DES TIRS
+				if (tirs[m] != null) 
+					FlxG.collide(tirs[m], destBlock, hitblock);
 				// MISSILES DEPASSE LE BORD HAUT
 				if ((missiles[m] != null) && (missiles[m].y < 0)) {
 						nettoyermissile();
@@ -90,32 +81,19 @@ package
 			if (ball.x > FlxG.width - (ball.ballwidth)) {
 				ball.velocity.x = -ball.velocity.x;
 			}*/
-			
-			tir = new Tir(paddle);
-			add(tir);
-			/*
 			// TIR DE MISSILE
-			if (FlxG.keys.justReleased("N")) {
-					if ((shootactive == true) && (missilescount < maxmissiles)) {
-							missileexist = true;
-							for (var triple:int = 0; triple < 3; triple++) {
-								if (triple != 2) {
-									missiles[missilescount] = new Missile(paddle.x + paddle.padwidth / 2 - 15*triple, paddle.y - 50);
-									missiles[missilescount].velocity.x = triple * 300;
-								}
-								else {
-									missiles[missilescount] = new Missile(paddle.x + paddle.padwidth / 2+ 15, paddle.y - 50);
-									missiles[missilescount].velocity.x = -300;
-								}						
-								missiles[missilescount].velocity.y = -300;
-								missiles[missilescount].missilenum = missilescount;
-								add(missiles[missilescount]);
-								missilescount++;
-							}
-					}
+
+			if (tirscount < maxtir) {
+				tirs.add(new Tir(paddle));
+				tirscount++;
+			}						
+			/* PARCOURIR LISTE
+			 * if (tirscount > 0) {
+				for (var t:int = 0; t < tirscount - 1; t++) {
+					//tirs.members[t]
+				}
 			}*/
 		}
-		
 		
 		/*// COLLISIONS
 		public function hitblock(obj1:FlxObject, obj2:FlxObject):void {
