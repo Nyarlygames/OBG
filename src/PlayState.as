@@ -6,7 +6,8 @@ package
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
-
+	import org.flixel.FlxPoint;
+	import org.flixel.plugin.photonstorm.FlxVelocity;
 
 	/**
 	 * Main game play state
@@ -22,7 +23,8 @@ package
 		public var tirscount:int = 0;
 		public var count:int = 0;
 		public var time:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + count.toString());
-		
+		public var cur:Cursor;
+		public var to:FlxPoint = new FlxPoint();
 		/**
 		 * CREATION DU JEU
 		 */
@@ -32,8 +34,11 @@ package
 			// AJOUT DES OBJETS
 			ship = new Ship();
 			add(ship);
+			cur = new Cursor();
+			add(cur);
 			tirs = new FlxGroup;
 			add(tirs);
+			FlxG.mouse.show();
 			time.setFormat(null, 12, 0x044071);
 			add(time);
 			//INITIALISATION TABLEAU DES MISSILES
@@ -49,6 +54,19 @@ package
 			super.update();
 			count++;
 			time.text = "Tirs : " + tirscount.toString();
+			cur.x = FlxG.mouse.x;
+			cur.y = FlxG.mouse.y;
+			if (tirscount < maxtir) {
+				tirs.add(new Tir(ship));
+				tirscount++;
+			}
+			
+			to.x = FlxG.mouse.x - (ship.x + ship.shipwidth/2);
+			to.y = FlxG.mouse.y - (ship.y + ship.shipheight / 2);
+			trace(to.x, to.y);
+			if ((to.x > 40) && (to.y > 40) || (to.x < -40) && (to.y < -40))
+				FlxVelocity.moveTowardsObject(ship, cur, 10);
+			FlxVelocity.moveTowardsObject(ship, cur, 500);
 			/*
 			for (var m:int = 0; m < maxtirs; m++) {
 				// COLLISION DES TIRS
@@ -81,12 +99,7 @@ package
 			if (ball.x > FlxG.width - (ball.ballwidth)) {
 				ball.velocity.x = -ball.velocity.x;
 			}*/
-			// TIR DE MISSILE
-
-			if (tirscount < maxtir) {
-				tirs.add(new Tir(ship));
-				tirscount++;
-			}						
+			// TIR DE MISSILE				
 			/* PARCOURIR LISTE
 			 * if (tirscount > 0) {
 				for (var t:int = 0; t < tirscount - 1; t++) {

@@ -1,8 +1,11 @@
 package  
 {
+	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxG;
 	import org.flixel.system.input.Mouse;
+	import org.flixel.FlxU;
+	import org.flixel.plugin.photonstorm.FlxVelocity;
 	
 	/**
 	 * PADDLE
@@ -16,6 +19,7 @@ package
 		public var shipheight:int = 90;
 		public var xpos:int = 0;
 		public var ypox:int = 0;
+		private static var coefficient1:Number = Math.PI / 4;
  
 		public function Ship() 
 		{
@@ -29,20 +33,28 @@ package
 		
 		override public function update():void
 		{
-			deplacement();
 		}
-		public function deplacement():void {
+		
+		/*public function deplacement():void {
 			// Déplacement souris
 			FlxG.mouse.show();
-			var tox:int = FlxG.mouse.x - (this.x+shipwidth/2);
-			var toy:int = FlxG.mouse.y - (this.y+shipheight/2);
+			
+			var to:FlxPoint = new FlxPoint();
+			var here:FlxPoint = new FlxPoint();
 			var os:int = 1;
-			var hypo:int = Math.sqrt(tox*tox + toy*toy);
-			angle = Math.cos(toy / hypo);
+			var aim:Number;
+			to.x = FlxG.mouse.x - (this.x + shipwidth/2);
+			to.y = FlxG.mouse.y - (this.y + shipheight / 2);
+			here.x = this.x;
+			here.y = this.y;
+			
+			aim = FlxU.getAngle(to, here);
+		
+			trace(aim);
 			
 			// GAUCHE/DROITE
-			if ((tox < -(shipwidth/2)) || (tox > (shipwidth/2)+os)) {
-				acceleration.x = tox/2;
+			if ((to.x < -(shipwidth/2)) || (to.x > (shipwidth/2)+os)) {
+				acceleration.x = to.x/2;
 			}
 			else{
 				velocity.x = 0;
@@ -50,14 +62,14 @@ package
 			}	
 			
 			// HAUT/BAS
-			if ((toy < -(shipheight/2)) || (toy > (shipheight/2)+os)) {
-				acceleration.y = toy/2;
+			if ((to.y < -(shipheight/2)) || (to.y > (shipheight/2)+os)) {
+				acceleration.y = to.y/2;
 			}
 			else{
 				velocity.y = 0;
 				
 				}
-		}
+		}*/
 	}
 
 }
