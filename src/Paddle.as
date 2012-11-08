@@ -2,6 +2,7 @@ package
 {
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxG;
+	import org.flixel.system.input.Mouse;
 	
 	/**
 	 * PADDLE
@@ -19,12 +20,27 @@ package
 		{
 			super(FlxG.width / 2, FlxG.height - 100, ImgPaddle);
 			immovable = true;
+			acceleration.x = 10;
+			acceleration.y = 10;
+			maxVelocity.x = 100;
+			maxVelocity.y = 100;
 		}
 		
 		override public function update():void
 		{
+			deplacement();
+		}
+		public function deplacement():void {
 			// GESTION TOUCHES APPUYEES
-			if (FlxG.keys.pressed("LEFT")) {
+			trace(FlxG.mouse.screenX);
+			trace(FlxG.mouse.x);
+			FlxG.mouse.show();
+			var tox:int = FlxG.mouse.x - this.x;
+			var toy:int = FlxG.mouse.y - this.y;
+			acceleration.x = tox;
+			acceleration.y = toy;
+			
+			/*if (FlxG.mouse.pressed("LEFT")) {
 				if (this.x > 0)
 					velocity.x = -300;
 				else
@@ -44,7 +60,7 @@ package
 			
 			if (FlxG.keys.justReleased("RIGHT")) {
 				velocity.x = 0;	
-			}
+			}*/
 		}
 		
 	}

@@ -6,7 +6,8 @@ package
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
-	
+
+
 	/**
 	 * Main game play state
 	 * @author 
@@ -43,7 +44,6 @@ package
 		public var retry:FlxText = new FlxText(FlxG.width / 2 -50, FlxG.height / 2 + 100, 250, "Appuyez sur \"Espace\" pour recommencer");
 		[Embed(source = '../assets/gfx/launcher.png')] public var ImgLauncher:Class;
 		
-		
 		/**
 		 * CREATION DU JEU
 		 */
@@ -57,7 +57,6 @@ package
 			add(ball);
 			destBlock = new FlxGroup;
 			add(destBlock);
-			
 			// BOUCLE DES BLOCS
 			for (var y:int; y < maxrow; y++) {
 				for (var x:int; x < maxblock; x++) {
