@@ -15,7 +15,7 @@ package
 	public class PlayState extends FlxState
 	{	
 		// VARIABLES DE PLAYSTATE
-		public var paddle:Paddle;
+		public var ship:Ship;
 		public var tirs:FlxGroup;
 		public var maxtir:int = 50000;
 		public var tir:Tir;
@@ -30,8 +30,8 @@ package
 		{
 			FlxG.bgColor = 0xaa519CCA;
 			// AJOUT DES OBJETS
-			paddle = new Paddle();
-			add(paddle);
+			ship = new Ship();
+			add(ship);
 			tirs = new FlxGroup;
 			add(tirs);
 			time.setFormat(null, 12, 0x044071);
@@ -48,7 +48,7 @@ package
 		{	
 			super.update();
 			count++;
-			time.text = "Temps : " + count.toString();
+			time.text = "Tirs : " + tirscount.toString();
 			/*
 			for (var m:int = 0; m < maxtirs; m++) {
 				// COLLISION DES TIRS
@@ -84,7 +84,7 @@ package
 			// TIR DE MISSILE
 
 			if (tirscount < maxtir) {
-				tirs.add(new Tir(paddle));
+				tirs.add(new Tir(ship));
 				tirscount++;
 			}						
 			/* PARCOURIR LISTE

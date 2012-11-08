@@ -17,12 +17,12 @@ package
 		public var xpos:int = 0;
 		public var ypos:int = 0;
 		
-		public function Tir(pad:Paddle) 
+		public function Tir(ship:Ship) 
 		{
-			var tox:int = FlxG.mouse.x - (pad.x+pad.padwidth/2);
-			var toy:int = FlxG.mouse.y - (pad.y+pad.padheight/2);
-			xpos = pad.x + pad.padwidth / 2;
-			ypos = pad.y + pad.padheight / 2;
+			var tox:int = FlxG.mouse.x - (ship.x+ship.shipwidth/2);
+			var toy:int = FlxG.mouse.y - (ship.y+ship.shipheight/2);
+			xpos = ship.x + ship.shipwidth / 2;
+			ypos = ship.y + ship.shipheight / 2;
 			super(xpos, ypos, ImgTir);
 			maxVelocity.x = 700;
 			maxVelocity.y = 700;
