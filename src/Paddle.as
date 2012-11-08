@@ -13,8 +13,10 @@ package
 		[Embed(source = '../assets/gfx/paddle.png')] public var ImgPaddle:Class;
 		[Embed(source = '../assets/gfx/paddleenl.png')] public var ImgPaddleenl:Class;
 		
-		public var padwidth:int = 150;
-		public var padheight:int = 20;
+		public var padwidth:int = 90;
+		public var padheight:int = 90;
+		public var xpos:int = 0;
+		public var ypox:int = 0;
  
 		public function Paddle() 
 		{
@@ -22,8 +24,8 @@ package
 			immovable = true;
 			acceleration.x = 10;
 			acceleration.y = 10;
-			maxVelocity.x = 100;
-			maxVelocity.y = 100;
+			maxVelocity.x = 200;
+			maxVelocity.y = 200;
 		}
 		
 		override public function update():void
@@ -31,38 +33,32 @@ package
 			deplacement();
 		}
 		public function deplacement():void {
-			// GESTION TOUCHES APPUYEES
-			trace(FlxG.mouse.screenX);
-			trace(FlxG.mouse.x);
+			// Déplacement souris
 			FlxG.mouse.show();
-			var tox:int = FlxG.mouse.x - this.x;
-			var toy:int = FlxG.mouse.y - this.y;
-			acceleration.x = tox;
-			acceleration.y = toy;
+			var tox:int = FlxG.mouse.x - (this.x+padwidth/2);
+			var toy:int = FlxG.mouse.y - (this.y+padheight/2);
+			var os:int = 1;
+			var hypo:int = Math.sqrt(tox*tox + toy*toy);
+			angle = Math.cos(toy / hypo);
 			
-			/*if (FlxG.mouse.pressed("LEFT")) {
-				if (this.x > 0)
-					velocity.x = -300;
-				else
-					velocity.x = 0;
+			// GAUCHE/DROITE
+			if ((tox < -(padwidth/2)) || (tox > (padwidth/2)+os)) {
+				acceleration.x = tox/2;
 			}
-			if (FlxG.keys.pressed("RIGHT"))  {
-				if (this.x < FlxG.width - padwidth)
-					velocity.x = 300;
-				else
-					velocity.x = 0;
-			}
-			
-			// GESTION TOUCHES RELACHEES
-			if (FlxG.keys.justReleased("LEFT")) {
+			else{
 				velocity.x = 0;
-			}
+				
+			}	
 			
-			if (FlxG.keys.justReleased("RIGHT")) {
-				velocity.x = 0;	
-			}*/
+			// HAUT/BAS
+			if ((toy < -(padheight/2)) || (toy > (padheight/2)+os)) {
+				acceleration.y = toy/2;
+			}
+			else{
+				velocity.y = 0;
+				
+				}
 		}
-		
 	}
 
 }

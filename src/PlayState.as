@@ -37,6 +37,7 @@ package
 		public var missileexist:Boolean = false;
 		public var maxmissiles:int = 50;
 		public var missile:FlxSprite;
+		public var tir:Tir;
 		public var ballsLeftLabel:FlxText = new FlxText(FlxG.width - 150, FlxG.height - 30, 200, "Balles restantes : " + ballsLeft.toString());
 		public var scoreLabel:FlxText = new FlxText(FlxG.width - 90, FlxG.height - 50, 200, "Score : " + score);
 		public var gameover:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Game Over");
@@ -89,6 +90,7 @@ package
 			// COLLISIONS
 			FlxG.collide(ball, paddle)
 			FlxG.collide(ball, destBlock, hitblock);
+			
 			
 			// ATTRAPER BONUS GROSSIR
 			if (FlxG.overlap(paddle, enl)) {
@@ -224,6 +226,10 @@ package
 				ball.velocity.x = -300;
 				ball.velocity.y = -300;
 			}
+			
+			
+			tir = new Tir(paddle);
+			add(tir);
 			// TIR DE MISSILE
 			if (FlxG.keys.justReleased("N")) {
 					if ((shootactive == true) && (missilescount < maxmissiles)) {
