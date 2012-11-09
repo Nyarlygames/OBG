@@ -20,7 +20,7 @@ package
 		public var ship:Ship;
 		public var area:Area;
 		public var tirs:FlxGroup;
-		public var maxtir:int = 200;
+		public var maxtir:int = 250;
 		public var tir:Tir;
 		public var count:int = 0;
 		public var time:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + count.toString());
@@ -53,11 +53,15 @@ package
 		override public function update():void
 		{	
 			super.update();
+			// Update textures texte
 			area.sticktoship(ship);
+			ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
 			count++;
 			time.text = "Tirs : " + tirs.length.toString();
 			cur.x = FlxG.mouse.x - cur.frameWidth/2;
-			cur.y = FlxG.mouse.y - cur.frameHeight/2;
+			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
+			
+			// Vaisseau bouge vers curseur
 			to.x = FlxG.mouse.x - (ship.x + ship.frameWidth/2);
 			to.y = FlxG.mouse.y - (ship.y + ship.frameHeight / 2);
 			if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
@@ -68,6 +72,8 @@ package
 				ship.velocity.x = 0;
 				ship.velocity.y = 0;
 			}
+			
+			// Recyclage des tirs
 			for (var t:int = 0; t < tirs.length; t++) {
 				if ((tirs.members[t] != null) && ((tirs.members[t].x > FlxG.width) || (tirs.members[t].y > FlxG.height) || 
 						(tirs.members[t].x < 0) || (tirs.members[t].y < 0))) {
@@ -84,36 +90,6 @@ package
 				 ajout.updatetir(ship);
 			}
 		}
-			/*
-			// BALL BORD BAS, RESET DE TOUT
-			if (ball.y > FlxG.height) {
-				shootactive = false;
-				shootexist = false;
-				if (missile != null) {
-					missile.kill();
-					missile.destroy();
-					missile = null;
-				}
-			}
-			// BALL BORD GAUCHE
-			if (paddle.x  < 0) {
-				ball.velocity.x = -ball.velocity.x;
-			}			
-			// BALL BORD HAUT
-			if (ball.y < 0) {
-				ball.velocity.y = -ball.velocity.y;
-			}			
-			// BALLE BORD DROIT
-			if (ball.x > FlxG.width - (ball.ballwidth)) {
-				ball.velocity.x = -ball.velocity.x;
-			}*/
-			// TIR DE MISSILE				
-			/* PARCOURIR LISTE
-			 * if (tirscount > 0) {
-				for (var t:int = 0; t < tirscount - 1; t++) {
-					//tirs.members[t]
-				}
-			}*/
 		
 		public function ajoutertir():void {
 			var t:int = tirs.getFirstNull();
