@@ -28,6 +28,19 @@ package
 			acceleration.y = toy;
 			velocity.x = tox;
 			velocity.y = toy;
+			exists = true;
+		}
+		
+		public function updatetir(ship:Ship):void {
+			var tox:int = FlxG.mouse.x - (ship.x+ship.frameWidth/2);
+			var toy:int = FlxG.mouse.y - (ship.y+ship.frameHeight/2);
+			x = ship.x + ship.frameWidth/2;
+			y = ship.y + ship.frameHeight/2;
+			acceleration.x = tox;
+			acceleration.y = toy;
+			velocity.x = tox;
+			velocity.y = toy;
+			exists = true;
 		}
 	}
 
