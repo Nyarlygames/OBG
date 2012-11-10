@@ -2,6 +2,7 @@ package
 {
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxG;
+	import org.flixel.FlxU;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
@@ -39,7 +40,11 @@ package
 		 */
 		override public function create():void
 		{
-			FlxG.bgColor = 0xaa519CCA;
+			// Active le scrolling
+			if (FlxG.getPlugin(FlxScrollZone) == null)
+			{
+				FlxG.addPlugin(new FlxScrollZone);
+			}
 			// AJOUT DES OBJETS
 			ship = new Ship();
 			area = new Area(ship);
@@ -55,12 +60,10 @@ package
 			add(cur);
 			tirs = new FlxGroup;
 			add(tirs);
-			FlxG.mouse.show();
 			time.setFormat(null, 12, 0x044071);
 			add(time);
-			
 			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, en, "health");
-			pv.trackParent(0, -50);
+			pv.trackParent(0, -10);
 			add(pv);
 		}
 		
@@ -83,8 +86,9 @@ package
 			to.y = FlxG.mouse.y - (ship.y + ship.frameHeight / 2);
 			if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 				(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
-					FlxVelocity.moveTowardsMouse(ship,200);
-				}
+					FlxVelocity.moveTowardsMouse(ship,2*FlxVelocity.distanceToMouse(ship));
+					
+					}
 			else if	(FlxCollision.pixelPerfectCheck(area, cur)) {
 				ship.velocity.x = 0;
 				ship.velocity.y = 0;
@@ -106,6 +110,7 @@ package
 							if ((en != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, en))) {
 								tir.exists = false;
 								en.hurt(dmg);
+								en.sound.play();
 								recyclerens();
 							}
 						}
@@ -131,8 +136,8 @@ package
 				}
 			}
 			if (tirs.length < maxtir) {
-				tirs.add(ajout);
-				ajoutertir();
+				var newtir:Tir = new Tir(ship);
+				tirs.add(newtir);
 			}
 			else {
 				var ajout:Tir =  tirs.getFirstAvailable() as Tir;

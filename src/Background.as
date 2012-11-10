@@ -18,11 +18,13 @@ package
 		public function Background() 
 		{
 			super(0, 0, ImgBG);
-			velocity.y = -30;
-			//FlxScrollZone.add(this, new Rectangle(0, 0, this.frameWidth, this.frameHeight), 0, -150);
-			//FlxScrollZone.createZone(this, new Rectangle(241, 16, 46, 46), 0, -150);
+			FlxScrollZone.add(this, new Rectangle(0, 0, this.width, this.height), 0, -2);
 		}
 		
+		override public function destroy():void
+		{
+			FlxScrollZone.clear();
+		}
 	}
 
 }

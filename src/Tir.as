@@ -2,7 +2,7 @@ package
 {
 	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;
-	import org.flixel.FlxG
+	import org.flixel.FlxG;
 	
 	/**
 	 * ...
