@@ -15,7 +15,7 @@ package
 		
 		public function Ship() 
 		{
-			super(FlxG.width / 2, FlxG.height - 100, ImgShip);
+			super(FlxG.width / 2, 100, ImgShip);
 			immovable = true;
 		}
 	}

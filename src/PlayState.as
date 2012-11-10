@@ -26,12 +26,14 @@ package
 		public var tirs:FlxGroup;
 		public var maxtir:int = 250;
 		public var tir:Tir;
+		public var dmg:int = 1;
 		public var count:int = 0;
 		public var time:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + count.toString());
 		public var cur:Cursor;
 		public var to:FlxPoint = new FlxPoint();
-			
-		public var vie:FlxBar;
+		public var bg:Background;
+		public var pv:FlxBar;
+		
 		/**
 		 * CREATION DU JEU
 		 */
@@ -43,6 +45,8 @@ package
 			area = new Area(ship);
 			ens = new FlxGroup();
 			en = new Ennemis();
+			bg = new Background();
+			add(bg);
 			add(ens);
 			ens.add(en);
 			add(area);
@@ -54,6 +58,10 @@ package
 			FlxG.mouse.show();
 			time.setFormat(null, 12, 0x044071);
 			add(time);
+			
+			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, en, "health");
+			pv.trackParent(0, -50);
+			add(pv);
 		}
 		
 		/**
@@ -81,33 +89,35 @@ package
 				ship.velocity.x = 0;
 				ship.velocity.y = 0;
 			}
-			/*for each (var en:Ennemis in ens.members) {
-				for each (var tir:Tir in tirs.members) {
-					if ((tir != null) && (FlxCollision.pixelPerfectCheck(tir, ens))) {
-						ens.pv --;
-					}
-					/*if (ens.pv == 0) {
-						recyclerens();
-					}
-				}
-			}*/
-			FlxG.collide(tirs, ens, hit);
+			
+			//Collisions
+			hit();
 			
 			// Recyclage des tirs
 			recycletirs()
 		}
 		
 		// Gestion des collisions
-		public function hit(g1:Tir, g2:Ennemis):void{
-			g1.exists = false;
-			g2.pv--;
-			recyclerens();
+		public function hit():void{
+			for each (var en:Ennemis in ens.members) {
+				if (en.exists) {
+					for each (var tir:Tir in tirs.members) {
+						if (tir.exists == true) {
+							if ((en != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, en))) {
+								tir.exists = false;
+								en.hurt(dmg);
+								recyclerens();
+							}
+						}
+					}
+				}
+			}
 		}
-		
 		public function recyclerens():void {
 			for each (var en:Ennemis in ens.members) {
-				if ((en != null) && (en.pv == 0)) {
+				if ((en != null) && (en.health == 0)) {
 					en.exists = false;
+					pv.exists = false;
 				}
 			}
 		}
@@ -121,8 +131,8 @@ package
 				}
 			}
 			if (tirs.length < maxtir) {
-				ajoutertir();
 				tirs.add(ajout);
+				ajoutertir();
 			}
 			else {
 				var ajout:Tir =  tirs.getFirstAvailable() as Tir;
