@@ -17,10 +17,10 @@ package
 		public var xpos:int = 0;
 		public var ypos:int = 0;
 		
-		public function Tir(ship:Ship) 
+		public function Tir(ship:FlxSprite, dest:FlxSprite) 
 		{
-			var tox:int = FlxG.mouse.x - (ship.x+ship.frameWidth/2);
-			var toy:int = FlxG.mouse.y - (ship.y+ship.frameHeight/2);
+			var tox:int = (dest.x + dest.frameWidth/2) - (ship.x+ship.frameWidth/2);
+			var toy:int = (dest.y + dest.frameHeight/2) - (ship.y + ship.frameHeight / 2);
 			super(ship.x + ship.frameWidth / 2, ship.y + ship.frameHeight / 2, ImgTir);
 			maxVelocity.x = 700;
 			maxVelocity.y = 700;
@@ -31,9 +31,9 @@ package
 			exists = true;
 		}
 		
-		public function updatetir(ship:Ship):void {
-			var tox:int = FlxG.mouse.x - (ship.x+ship.frameWidth/2);
-			var toy:int = FlxG.mouse.y - (ship.y+ship.frameHeight/2);
+		public function updatetir(ship:FlxSprite, dest:FlxSprite):void {
+			var tox:int = (dest.x + dest.frameWidth/2)- (ship.x+ship.frameWidth/2);
+			var toy:int = (dest.y  + dest.frameHeight/2)- (ship.y+ship.frameHeight/2);
 			x = ship.x + ship.frameWidth/2;
 			y = ship.y + ship.frameHeight / 2;
 			acceleration.x = tox;

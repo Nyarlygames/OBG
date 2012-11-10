@@ -12,7 +12,6 @@ package
 	 */
 	public class Background extends FlxSprite 
 	{
-		
 		[Embed(source = '../assets/gfx/bg.png')] public var ImgBG:Class;
 		
 		public function Background() 

@@ -2,7 +2,6 @@ package
 {
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxG;
-	import org.flixel.FlxU;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
@@ -23,17 +22,14 @@ package
 		public var ship:Ship;
 		public var area:Area;
 		public var ens:FlxGroup;
+		public var ships:FlxGroup;
 		public var en:Ennemis;
 		public var tirs:FlxGroup;
 		public var maxtir:int = 250;
-		public var tir:Tir;
 		public var dmg:int = 1;
-		public var count:int = 0;
-		public var time:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + count.toString());
+		public var time:FlxText;
 		public var cur:Cursor;
-		public var to:FlxPoint = new FlxPoint();
 		public var bg:Background;
-		public var pv:FlxBar;
 		
 		/**
 		 * CREATION DU JEU
@@ -46,6 +42,9 @@ package
 				FlxG.addPlugin(new FlxScrollZone);
 			}
 			// AJOUT DES OBJETS
+			
+			cur = new Cursor();
+			ships = new FlxGroup ();
 			ship = new Ship();
 			area = new Area(ship);
 			ens = new FlxGroup();
@@ -53,106 +52,79 @@ package
 			bg = new Background();
 			add(bg);
 			add(ens);
+			add(en.pv);
 			ens.add(en);
+			add(en.tirs);
 			add(area);
+			add(ship.pv);
 			add(ship);
-			cur = new Cursor();
+			add(ship.tirs);
+			ships.add(ship);
 			add(cur);
-			tirs = new FlxGroup;
-			add(tirs);
+			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.tirs.length.toString());
 			time.setFormat(null, 12, 0x044071);
 			add(time);
-			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, en, "health");
-			pv.trackParent(0, -10);
-			add(pv);
 		}
 		
 		/**
 		 * MISE A JOUR DU JEU
 		 */
 		override public function update():void
-		{	
+		{
 			super.update();
 			// Update textures texte
 			area.sticktoship(ship);
 			ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
-			count++;
-			time.text = "Tirs : " + tirs.length.toString();
-			cur.x = FlxG.mouse.x - cur.frameWidth/2;
+			time.text = "Vies : " + ship.life.toString();
+			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
 			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
 			
-			// Vaisseau bouge vers curseur
-			to.x = FlxG.mouse.x - (ship.x + ship.frameWidth/2);
-			to.y = FlxG.mouse.y - (ship.y + ship.frameHeight / 2);
-			if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
-				(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
-					FlxVelocity.moveTowardsMouse(ship,2*FlxVelocity.distanceToMouse(ship));
-					
-					}
-			else if	(FlxCollision.pixelPerfectCheck(area, cur)) {
-				ship.velocity.x = 0;
-				ship.velocity.y = 0;
-			}
+			// Bouge le vaisseau
+			ship.moveship(area, cur);
 			
 			//Collisions
+			damage();
 			hit();
-			
+			trace(ship.x, ship.y);
 			// Recyclage des tirs
-			recycletirs()
+			ship.recycletirs(cur)
+			en.recycletirs(ship)
+			// Recyclage ennemis
+			en.mort();
 		}
 		
-		// Gestion des collisions
+		// Gestion des collisions tirs > ennemis
 		public function hit():void{
 			for each (var en:Ennemis in ens.members) {
 				if (en.exists) {
-					for each (var tir:Tir in tirs.members) {
+					for each (var tir:Tir in ship.tirs.members) {
 						if (tir.exists == true) {
 							if ((en != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, en))) {
 								tir.exists = false;
 								en.hurt(dmg);
 								en.sound.play();
-								recyclerens();
+								en.mort();
 							}
 						}
 					}
 				}
 			}
 		}
-		public function recyclerens():void {
+		
+		// Gestion des collisions tirsennemis > vaisseau, à généraliser
+		public function damage():void{
 			for each (var en:Ennemis in ens.members) {
-				if ((en != null) && (en.health == 0)) {
-					en.exists = false;
-					pv.exists = false;
+				if (en.exists) {
+					for each (var tir:Tir in en.tirs.members) {
+						if (tir.exists == true) {
+							if ((ship != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, ship))) {
+								tir.exists = false;
+								ship.hurt(dmg);
+								ship.mort();
+							}
+						}
+					}
 				}
-			}
-		}
-		
-		// Gestion des balles pour performances
-		public function recycletirs():void{
-			for each (var tir:Tir in tirs.members) {
-				if ((tir != null) && ((tir.x > FlxG.width) || (tir.y > FlxG.height) || 
-						(tir.x < 0) || (tir.y < 0))) {
-						tir.exists = false;
-				}
-			}
-			if (tirs.length < maxtir) {
-				var newtir:Tir = new Tir(ship);
-				tirs.add(newtir);
-			}
-			else {
-				var ajout:Tir =  tirs.getFirstAvailable() as Tir;
-				if (ajout != null)
-				 ajout.updatetir(ship);
-			}
-		}
-		
-		public function ajoutertir():void {
-			var t:int = tirs.getFirstNull();
-			if (t != -1) {
-				var ajout:Tir =  tirs.getFirstAvailable() as Tir;
-				ajout = new Tir(ship);
-				ajout.exists = true;
-				tirs.add(ajout);
 			}
 		}
 
