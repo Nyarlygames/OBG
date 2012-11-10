@@ -1,4 +1,4 @@
 OBG
 ===
 
-One button/input game project for IUT Bobigny
+One button game project - Shoot'em Up

@@ -7,8 +7,10 @@ package
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxPoint;
+	import org.flixel.plugin.photonstorm.FlxScrollZone;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.plugin.photonstorm.FlxCollision;
+	import org.flixel.plugin.photonstorm.FlxBar;
 
 	/**
 	 * Main game play state
@@ -19,6 +21,8 @@ package
 		// VARIABLES DE PLAYSTATE
 		public var ship:Ship;
 		public var area:Area;
+		public var ens:FlxGroup;
+		public var en:Ennemis;
 		public var tirs:FlxGroup;
 		public var maxtir:int = 250;
 		public var tir:Tir;
@@ -26,6 +30,8 @@ package
 		public var time:FlxText = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + count.toString());
 		public var cur:Cursor;
 		public var to:FlxPoint = new FlxPoint();
+			
+		public var vie:FlxBar;
 		/**
 		 * CREATION DU JEU
 		 */
@@ -35,6 +41,10 @@ package
 			// AJOUT DES OBJETS
 			ship = new Ship();
 			area = new Area(ship);
+			ens = new FlxGroup();
+			en = new Ennemis();
+			add(ens);
+			ens.add(en);
 			add(area);
 			add(ship);
 			cur = new Cursor();
@@ -44,7 +54,6 @@ package
 			FlxG.mouse.show();
 			time.setFormat(null, 12, 0x044071);
 			add(time);
-			
 		}
 		
 		/**
@@ -72,12 +81,43 @@ package
 				ship.velocity.x = 0;
 				ship.velocity.y = 0;
 			}
+			/*for each (var en:Ennemis in ens.members) {
+				for each (var tir:Tir in tirs.members) {
+					if ((tir != null) && (FlxCollision.pixelPerfectCheck(tir, ens))) {
+						ens.pv --;
+					}
+					/*if (ens.pv == 0) {
+						recyclerens();
+					}
+				}
+			}*/
+			FlxG.collide(tirs, ens, hit);
 			
 			// Recyclage des tirs
-			for (var t:int = 0; t < tirs.length; t++) {
-				if ((tirs.members[t] != null) && ((tirs.members[t].x > FlxG.width) || (tirs.members[t].y > FlxG.height) || 
-						(tirs.members[t].x < 0) || (tirs.members[t].y < 0))) {
-						tirs.members[t].exists = false;
+			recycletirs()
+		}
+		
+		// Gestion des collisions
+		public function hit(g1:Tir, g2:Ennemis):void{
+			g1.exists = false;
+			g2.pv--;
+			recyclerens();
+		}
+		
+		public function recyclerens():void {
+			for each (var en:Ennemis in ens.members) {
+				if ((en != null) && (en.pv == 0)) {
+					en.exists = false;
+				}
+			}
+		}
+		
+		// Gestion des balles pour performances
+		public function recycletirs():void{
+			for each (var tir:Tir in tirs.members) {
+				if ((tir != null) && ((tir.x > FlxG.width) || (tir.y > FlxG.height) || 
+						(tir.x < 0) || (tir.y < 0))) {
+						tir.exists = false;
 				}
 			}
 			if (tirs.length < maxtir) {
