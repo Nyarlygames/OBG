@@ -11,6 +11,7 @@ package
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.plugin.photonstorm.FlxCollision;
 	import org.flixel.plugin.photonstorm.FlxBar;
+	import org.flixel.plugin.photonstorm.FlxWeapon;
 
 	/**
 	 * Main game play state
@@ -53,10 +54,10 @@ package
 			add(ship)
 			add(hb);
 			ships.add(ship);
-			add(ship.tirs);
-			add(en.tirs);
+			add(ship.shoot.group);
+			add(en.shoot.group);
 			add(cur);
-			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.tirs.length.toString());
+			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.shoot.group.length.toString());
 			time.setFormat(null, 12, 0x044071);
 			add(time);
 		}
@@ -78,50 +79,38 @@ package
 			// Bouge le vaisseau
 			ship.moveship(area, cur);
 			
-			//Collisions
-			damage();
-			hit();
-			// Recyclage des tirs
-			ship.recycletirs(cur)
-			en.recycletirs(ship)
-			// Recyclage ennemis
-			en.mort();
-		}
-		
-		// Gestion des collisions tirs > ennemis
-		public function hit():void{
-			for each (var en:Ennemis in ens.members) {
-				if (en.exists) {
-					for each (var tir:Tir in ship.tirs.members) {
-						if (tir.exists == true) {
-							if ((en != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, en))) {
-								tir.exists = false;
-								en.hurt(dmg);
-								en.sound.play();
-								en.mort();
-							}
-						}
-					}
+			//Collisions & tirs
+			FlxG.overlap(ship.shoot.group, en, hit);
+			ship.shoot.fireAtMouse();
+			for each (var op:Ennemis in ens.members) {
+				if ((op != null) && (op.exists == true)){
+					FlxG.overlap(op.shoot.group, ship, damage);
+					op.shoot.fireAtTarget(hb);
 				}
 			}
 		}
 		
-		// Gestion des collisions tirsennemis > vaisseau, à généraliser
-		public function damage():void{
-			for each (var en:Ennemis in ens.members) {
-				if (en.exists) {
-					for each (var tir:Tir in en.tirs.members) {
-						if (tir.exists == true) {
-							if ((ship != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, hb))) {
-								tir.exists = false;
-								ship.hurt(dmg);
-								ship.mort();
-							}
-						}
-					}
-				}
-			}
+		// TOUCHE ENNEMIS
+		private function hit(bullet:FlxObject, target:Ennemis):void
+		{
+			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ennemis))
+			{
+				target.hurt(dmg);
+				target.sound.play();
+				bullet.kill();
+				target.mort();
+			}			
 		}
-
+		
+		// TOUCHE PAR ENNEMIS
+		private function damage(bullet:FlxObject, target:Ship):void
+		{
+			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ship))
+			{
+				target.hurt(dmg);
+				bullet.kill();
+				target.mort();
+			}			
+		}
 	}
 }
