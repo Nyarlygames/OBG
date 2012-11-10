@@ -21,15 +21,14 @@ package
 		// VARIABLES DE PLAYSTATE
 		public var ship:Ship;
 		public var area:Area;
-		public var ens:FlxGroup;
-		public var ships:FlxGroup;
-		public var en:Ennemis;
-		public var tirs:FlxGroup;
-		public var maxtir:int = 250;
+		public var hb:Hitbox;
+		public var ens:FlxGroup = new FlxGroup();
+		public var ships:FlxGroup = new FlxGroup();
+		public var en:Ennemis = new Ennemis();
 		public var dmg:int = 1;
 		public var time:FlxText;
-		public var cur:Cursor;
-		public var bg:Background;
+		public var cur:Cursor = new Cursor();
+		public var bg:Background = new Background();
 		
 		/**
 		 * CREATION DU JEU
@@ -42,24 +41,20 @@ package
 				FlxG.addPlugin(new FlxScrollZone);
 			}
 			// AJOUT DES OBJETS
-			
-			cur = new Cursor();
-			ships = new FlxGroup ();
 			ship = new Ship();
 			area = new Area(ship);
-			ens = new FlxGroup();
-			en = new Ennemis();
-			bg = new Background();
+			hb = new Hitbox(ship);
 			add(bg);
 			add(ens);
 			add(en.pv);
 			ens.add(en);
-			add(en.tirs);
 			add(area);
 			add(ship.pv);
-			add(ship);
-			add(ship.tirs);
+			add(ship)
+			add(hb);
 			ships.add(ship);
+			add(ship.tirs);
+			add(en.tirs);
 			add(cur);
 			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.tirs.length.toString());
 			time.setFormat(null, 12, 0x044071);
@@ -72,8 +67,9 @@ package
 		override public function update():void
 		{
 			super.update();
-			// Update textures texte
+			// Update textures & texte
 			area.sticktoship(ship);
+			hb.sticktoship(ship);
 			ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
 			time.text = "Vies : " + ship.life.toString();
 			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
@@ -85,7 +81,6 @@ package
 			//Collisions
 			damage();
 			hit();
-			trace(ship.x, ship.y);
 			// Recyclage des tirs
 			ship.recycletirs(cur)
 			en.recycletirs(ship)
@@ -117,7 +112,7 @@ package
 				if (en.exists) {
 					for each (var tir:Tir in en.tirs.members) {
 						if (tir.exists == true) {
-							if ((ship != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, ship))) {
+							if ((ship != null) && (tir != null) && (FlxCollision.pixelPerfectCheck(tir, hb))) {
 								tir.exists = false;
 								ship.hurt(dmg);
 								ship.mort();
