@@ -60,6 +60,15 @@ package
 			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.shoot.group.length.toString());
 			time.setFormat(null, 12, 0x044071);
 			add(time);
+			
+			/* Camera suit le vaisseau
+			if (FlxG.getPlugin(FlxMouseControl) == null)
+			{
+				FlxG.addPlugin(new FlxMouseControl);
+			}
+			FlxG.camera.follow(ship);
+			FlxG.camera.deadzone = new FlxRect(32, 32, FlxG.width, FlxG.height);
+			FlxMouseControl.linkToDeadZone = true;*/
 		}
 		
 		/**
@@ -81,7 +90,7 @@ package
 			
 			//Collisions & tirs
 			FlxG.overlap(ship.shoot.group, en, hit);
-			ship.shoot.fireAtMouse();
+			ship.shoot.fireAtPosition(ship.x, FlxG.height);
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)){
 					FlxG.overlap(op.shoot.group, ship, damage);
