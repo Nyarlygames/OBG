@@ -42,7 +42,7 @@ package
 		 */
 		override public function create():void
 		{
-			
+			var map:Map = new Map();
 			FlxG.bgColor = 0xaa4E4F4D;
 			os.x = 200;
 			os.y = 50;
