@@ -32,7 +32,7 @@ package
 			exists = true;
 			shoot = new FlxWeapon("shoot", this, "x", "y");
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
-			shoot.setFireRate(10);
+			shoot.setFireRate(2);
 			shoot.setBulletSpeed(300);
 		}
 			

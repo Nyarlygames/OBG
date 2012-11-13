@@ -25,7 +25,8 @@ package
 		public var hb:Hitbox;
 		public var ens:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
-		public var en:Ennemis = new Ennemis();
+		[Embed(source = '../assets/gfx/ennemis.png')] public var ImgEnnemis:Class;
+		public var en:Ennemis = new Ennemis(FlxG.width / 2, FlxG.height -100, ImgEnnemis, 100);
 		public var dmg:int = 1;
 		public var time:FlxText;
 		public var cur:Cursor = new Cursor();
