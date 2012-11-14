@@ -19,18 +19,19 @@ package
 		public var maxtir:int = 20;
 		public var shoot:FlxWeapon;
 		public var sound:FlxSound;
+		public var player:Ship;
 
-		public function Ennemis(x:int, y:int, ImgType:Class, vie:int) 
+		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
 		{
 			sound = new FlxSound();
-			sound.loadStream("../assets/sfx/tir.mp3", false, true);
+			player = ship;
+			sound.loadStream("../assets/sfx/menus.mp3", false, true);
 			super(x, y, ImgType);
 			immovable = true;
 			health = vie;
 			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, this, "health",0 ,health);
 			pv.trackParent(0, -10);
 			shoot = new FlxWeapon("shoot", this, "x", "y");
-			
 		}
 		
 		// Mort du vaisseau
@@ -39,6 +40,9 @@ package
 				pv.exists = false;
 				this.exists = false;
 			}
+		}
+		
+		public function behave():void {
 		}
 	}
 

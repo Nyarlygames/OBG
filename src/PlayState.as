@@ -31,7 +31,7 @@ package
 		public var cur:Cursor = new Cursor();
 		public var bg:Background = new Background();
 		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
-		public var map:Map = new Map(mapfile);
+		public var map:Map;
 		
 		/**
 		 * CREATION DU JEU
@@ -45,6 +45,7 @@ package
 			}
 			// AJOUT DES OBJETS
 			ship = new Ship();
+			map = new Map(mapfile, ship);
 			area = new Area(ship);
 			hb = new Hitbox(ship);
 			add(bg);
@@ -89,7 +90,8 @@ package
 			FlxG.overlap(ship.shoot.group, ens, hit);
 			ship.shoot.fireAtMouse();
 			for each (var op:Ennemis in ens.members) {
-				if ((op != null) && (op.exists == true)){
+				if ((op != null) && (op.exists == true)) {
+					op.behave();
 					FlxG.overlap(op.shoot.group, ship, damage);
 					op.shoot.fireAtTarget(hb);
 				}

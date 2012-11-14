@@ -43,8 +43,7 @@ package
 			if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 				(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
 					FlxVelocity.moveTowardsMouse(this,2*FlxVelocity.distanceToMouse(this));
-					
-					}
+			}
 			else if	(FlxCollision.pixelPerfectCheck(area, cur)) {
 				this.velocity.x = 0;
 				this.velocity.y = 0;

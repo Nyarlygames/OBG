@@ -21,7 +21,7 @@ package
 			 * BOSS
 			 * ...
 		 * */
-		public function Map(map:Class) 
+		public function Map(map:Class, player:Ship) 
 		{
 			var fileContent:String = new map();
 			var lignes:Array = fileContent.split('\n');
@@ -34,13 +34,13 @@ package
 					if (en != null) {
 						switch(en[0]){
 							case "Classic":
-								ens.add(new Classique(en[1], en[2], en[3]));
+								ens.add(new Classique(en[1], en[2], en[3], player));
 							break;
 							case "Bomber":
-								ens.add(new Bomber(en[1], en[2], en[3]));
+								ens.add(new Bomber(en[1], en[2], en[3], player));
 							break;
 							default:
-								ens.add(new Classique(en[1], en[2], en[3]));
+								ens.add(new Classique(en[1], en[2], en[3], player));
 						}
 					}
 			}

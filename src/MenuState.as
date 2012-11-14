@@ -56,9 +56,9 @@ package
 			start = new FlxSprite(FlxG.width / 3 -os.x, FlxG.height /2, ImgStart);
 			quit = new FlxSprite(FlxG.width-os.x, FlxG.height /2, ImgQuit);
 			opts = new FlxSprite(FlxG.width * 2 / 3 -os.x, FlxG.height /2, ImgOpts);
-			optse = new Ennemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20);
-			starte = new Ennemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20);
-			quite = new Ennemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20);
+			optse = new Ennemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20, ship);
+			starte = new Ennemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20, ship);
+			quite = new Ennemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20, ship);
 			title = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 200, 100, "Yet Another Shoot'em Up");;
 			quite.x += quite.frameWidth / 2;
 			optse.x += optse.frameWidth / 2;
