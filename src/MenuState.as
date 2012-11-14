@@ -29,9 +29,9 @@ package
 		[Embed(source = '../assets/gfx/quittere.png')] public var ImgQuite:Class;
 		[Embed(source = '../assets/gfx/optionse.png')] public var ImgOptse:Class;
 		[Embed(source = '../assets/gfx/demarrere.png')] public var ImgStarte:Class;
-		public var optse:Ennemis;
-		public var quite:Ennemis;
-		public var starte:Ennemis;
+		public var optse:MenusEnnemis;
+		public var quite:MenusEnnemis;
+		public var starte:MenusEnnemis;
 		public var os:FlxPoint = new FlxPoint();
 		public var ship:Ship = new Ship();
 		public var cur:Cursor = new Cursor();
@@ -56,9 +56,9 @@ package
 			start = new FlxSprite(FlxG.width / 3 -os.x, FlxG.height /2, ImgStart);
 			quit = new FlxSprite(FlxG.width-os.x, FlxG.height /2, ImgQuit);
 			opts = new FlxSprite(FlxG.width * 2 / 3 -os.x, FlxG.height /2, ImgOpts);
-			optse = new Ennemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20, ship);
-			starte = new Ennemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20, ship);
-			quite = new Ennemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20, ship);
+			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20, ship);
+			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20, ship);
+			quite = new MenusEnnemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20, ship);
 			title = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 200, 100, "Yet Another Shoot'em Up");;
 			quite.x += quite.frameWidth / 2;
 			optse.x += optse.frameWidth / 2;

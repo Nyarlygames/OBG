@@ -24,6 +24,7 @@ package
 		public var area:Area;
 		public var hb:Hitbox;
 		public var ens:FlxGroup = new FlxGroup();
+		public var explodes:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
 	//	public var en:Classique = new Classique(100, FlxG.width / 2, FlxG.height -100);
 		public var dmg:int = 1;
@@ -96,18 +97,29 @@ package
 					op.shoot.fireAtTarget(hb);
 				}
 			}
+			
+			for each (var expl:FlxSprite in explodes.members) {
+				if ((expl != null) && (expl.exists == true))
+					if (expl.finished) {
+						expl.exists = false;
+						explodes.remove(expl, true);
+					}
+			}
 		}
 		
 		// TOUCHE ENNEMIS
 		private function hit(bullet:FlxObject, target:Ennemis):void
-		{
+		{	
+			var explode:FlxSprite;
 			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ennemis))
 			{
 				target.hurt(dmg);
-				target.sound.play();
+				target.sound.play(); 
 				bullet.kill();
-				target.mort();
-			}			
+				explode = target.mort();
+				explodes.add(explode);
+				add(explode);
+			}		
 		}
 		
 		// TOUCHE PAR ENNEMIS

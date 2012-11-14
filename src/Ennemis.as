@@ -20,12 +20,12 @@ package
 		public var shoot:FlxWeapon;
 		public var sound:FlxSound;
 		public var player:Ship;
-
+		
 		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
 		{
 			sound = new FlxSound();
-			player = ship;
 			sound.loadStream("../assets/sfx/menus.mp3", false, true);
+			player = ship;
 			super(x, y, ImgType);
 			immovable = true;
 			health = vie;
@@ -35,15 +35,16 @@ package
 		}
 		
 		// Mort du vaisseau
-		public function mort():void {
+		public function mort():FlxSprite {
 			if (health == 0) {
 				pv.exists = false;
 				this.exists = false;
 			}
+			return(null);
 		}
 		
 		public function behave():void {
-		}
+		}	
 	}
 
 }

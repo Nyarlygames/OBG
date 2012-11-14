@@ -6,7 +6,8 @@ package
 	import org.flixel.plugin.photonstorm.FlxDelay;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxG;
-	
+	import org.flixel.FlxSprite;
+	import org.flixel.plugin.photonstorm.FlxDelay;
 	/**
 	 * Ennemis de base
 	 * @author ...
@@ -16,7 +17,8 @@ package
 		
 		[Embed(source = '../assets/gfx/ennemis.png')] public var ImgClassic:Class;
 		[Embed(source = '../assets/gfx/tir.png')] public var ImgShoot:Class;
-		private var timer:FlxDelay = new FlxDelay(3500);
+		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
+		public var timer:FlxDelay = new FlxDelay(3500);
 		
 		public function Classique(vie:int, x:int, y:int, ship:Ship) 
 		{
@@ -42,6 +44,23 @@ package
 				back.y = FlxG.height * 3 / 5;
 				FlxVelocity.moveTowardsPoint(this, back, 1, 3000);
 			}
+		}
+		
+		override public function mort():FlxSprite {
+			if (health == 0) {
+				pv.exists = false;
+				var explosion:FlxSprite = new FlxSprite(x, y)
+				explosion.loadGraphic(Explode, true, false, 256, 128);
+				explosion.addAnimation("explode", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 15, true);
+				explosion.exists = false;
+				explosion.x = x - explosion.frameWidth/2 + frameWidth /2;
+				explosion.y = y - explosion.frameHeight/2 + frameHeight /2;
+				explosion.exists = true;
+				explosion.play("explode");
+				this.exists = false;
+				return(explosion);
+			}
+			return(null);
 		}
 	}
 
