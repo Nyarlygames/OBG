@@ -11,7 +11,6 @@ package
 		
 		public function Options() 
 		{
-			
 		}
 		
 	}

@@ -3,20 +3,22 @@ package
 	import org.flixel.FlxGame;
 
 	[SWF(width = "1024", height = "768", backgroundColor = "#000000")]
-	 [Frame(factoryClass="Preloader")]
+	[Frame(factoryClass = "Preloader")]
 	
 	/**
-	 * Starting point of the game application
+	 * Démarrage
 	 * @author 
 	 */
 	public class OBG extends FlxGame
 	{
+		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
+		public var config:Configs = new Configs(configs);
+		
 		public function OBG()
 		{
-			//Function to call to create the game at a specified screen size and display the first state (MenuState)
-			super(1024, 768, MenuState);
-		}
 		
+			super(config.width, config.height, MenuState);
+		}
 	}
 
 }

@@ -8,11 +8,10 @@ package
 	public class Map 
 	{
 		
-		public function Map() 
+		public function Map(map:Class) 
 		{
-			[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] var testFile:Class;
-			var fileContent:String = new testFile();
-			var result:Array = fileContent.split('\n');
+			var fileContent:String = new map();
+			var lignes:Array = fileContent.split('\n');
 			
 		}
 		

@@ -10,6 +10,8 @@ package
 	import org.flixel.FlxObject;
 	import org.flixel.plugin.photonstorm.FlxCollision;
 	import flash.system.System;
+    import flash.display.StageDisplayState;
+    import flash.events.Event;
 	 
 	/**
 	 * Menu state
@@ -17,7 +19,7 @@ package
 	 */
 	public class MenuState extends FlxState
 	{
-		public var title:FlxText = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 200, 100, "Yet Another Shoot'em Up");
+		public var title:FlxText;
 		public var start:FlxSprite;
 		public var quit:FlxSprite;
 		public var opts:FlxSprite;
@@ -36,13 +38,19 @@ package
 		public var area:Area = new Area(ship);
 		public var ens:FlxGroup = new FlxGroup();
 		public var dmg:int = 1;
+		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
+		public var config:Configs = new Configs(configs);
+		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
+		public var map:Map = new Map(mapfile);
 		
 		/**
 		 * Create the menu state
 		 */
 		override public function create():void
-		{
-			var map:Map = new Map();
+		{	
+			FlxG.stage.displayState = StageDisplayState.FULL_SCREEN;
+			FlxG.width = config.width;
+			FlxG.height = config.height;
 			FlxG.bgColor = 0xaa4E4F4D;
 			os.x = 200;
 			os.y = 50;
@@ -53,6 +61,7 @@ package
 			optse = new Ennemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20);
 			starte = new Ennemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20);
 			quite = new Ennemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20);
+			title = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 200, 100, "Yet Another Shoot'em Up");;
 			quite.x += quite.frameWidth / 2;
 			optse.x += optse.frameWidth / 2;
 			starte.x += starte.frameWidth / 2;
