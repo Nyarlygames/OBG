@@ -24,7 +24,6 @@ package
 		{
 			sound = new FlxSound();
 			sound.loadStream("../assets/sfx/tir.mp3", false, true);
-			trace(sound);
 			super(x, y, ImgType);
 			immovable = true;
 			health = vie;

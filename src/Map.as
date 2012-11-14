@@ -11,7 +11,16 @@ package
 		
 		public var ens:FlxGroup = new FlxGroup();
 		
-		// Crée le groupe d'ennemis à partir d'un fichier;
+		// Crée le groupe d'ennemis à partir d'un fichier
+		
+		/* FORMAT :
+			 * ID STAGE
+			 * MAXSCORE
+			 * BACKGROUND PICTURE
+			 * TYPEENNEMIS VIE X Y
+			 * BOSS
+			 * ...
+		 * */
 		public function Map(map:Class) 
 		{
 			var fileContent:String = new map();
@@ -23,7 +32,6 @@ package
 				if (lignes[i] != null)
 					en = lignes[i].split('/');
 					if (en != null) {
-						trace(en);
 						switch(en[0]){
 							case "Classic":
 								ens.add(new Classique(en[1], en[2], en[3]));
