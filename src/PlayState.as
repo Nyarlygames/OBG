@@ -27,7 +27,6 @@ package
 		public var ens:FlxGroup = new FlxGroup();
 		public var explodes:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
-		public var dmg:int = 1;
 		public var time:FlxText;
 		public var cur:Cursor = new Cursor();
 		public var bg:Background = new Background();
@@ -95,6 +94,7 @@ package
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)) {
 					op.behave();
+					coll.op = op;
 					FlxG.overlap(op.shoot.group, ship, coll.damage);
 					FlxG.overlap(op, ship, coll.collide);
 					op.shoot.fireAtTarget(hb);

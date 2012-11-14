@@ -1,6 +1,7 @@
 package  
 {
 	
+	import org.flixel.FlxObject;
 	import org.flixel.FlxSound;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.plugin.photonstorm.FlxDelay;
@@ -29,6 +30,7 @@ package
 			shoot.setFireRate(10);
 			shoot.setBulletSpeed(300);
 			timer.start();
+			dmg = 5;
 		}
 		
 		override public function behave():void {

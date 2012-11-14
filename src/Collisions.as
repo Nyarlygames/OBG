@@ -11,6 +11,7 @@ package
 	public class Collisions extends FlxObject 
 	{
 		public var ps:PlayState;
+		public var op:Ennemis;
 		
 		public function Collisions(play:PlayState) 
 		{
@@ -23,7 +24,7 @@ package
 			var explode:FlxSprite;
 			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ennemis))
 			{
-				target.hurt(ps.dmg);
+				target.hurt(ps.ship.dmg);
 				target.sound.play(); 
 				bullet.kill();
 				explode = target.mort();
@@ -37,22 +38,37 @@ package
 		// TOUCHE PAR ENNEMIS
 		public function damage(bullet:FlxObject, target:Ship):void
 		{
-			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target.hb as Hitbox))
+			var explode:FlxSprite;
+			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target.hb as Hitbox) && (op != null))
 			{
-				target.hurt(1);
+				target.hurt(op.dmg);
 				bullet.kill();
-				target.mort();
+				explode = target.mort();
+				if (explode != null) {
+					ps.explodes.add(explode);
+					ps.add(explode);
+				}
 			}			
 		}
 		
 		public function collide(touche:Ennemis, target:Ship):void
 		{
-			if (FlxCollision.pixelPerfectCheck(touche as Ennemis, target as Ship))
+			var explode:FlxSprite;
+			var exploded:FlxSprite;
+			if (FlxCollision.pixelPerfectCheck(touche as Ennemis, target as Ship) && (op != null))
 			{
 				target.health = 0;
 				touche.health = 0;
-				touche.mort();
-				target.mort();
+				explode = touche.mort();
+				if (explode != null) {
+					ps.explodes.add(explode);
+					ps.add(explode);
+				}
+				exploded = target.mort();
+				if (exploded != null) {
+					ps.explodes.add(exploded);
+					ps.add(exploded);
+				}
 			}			
 		}
 	}
