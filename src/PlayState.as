@@ -25,12 +25,13 @@ package
 		public var hb:Hitbox;
 		public var ens:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
-		[Embed(source = '../assets/gfx/ennemis.png')] public var ImgEnnemis:Class;
-		public var en:Ennemis = new Ennemis(FlxG.width / 2, FlxG.height -100, ImgEnnemis, 100);
+	//	public var en:Classique = new Classique(100, FlxG.width / 2, FlxG.height -100);
 		public var dmg:int = 1;
 		public var time:FlxText;
 		public var cur:Cursor = new Cursor();
 		public var bg:Background = new Background();
+		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
+		public var map:Map = new Map(mapfile);
 		
 		/**
 		 * CREATION DU JEU
@@ -47,16 +48,20 @@ package
 			area = new Area(ship);
 			hb = new Hitbox(ship);
 			add(bg);
+			ens = map.ens;
 			add(ens);
-			add(en.pv);
-			ens.add(en);
+			for each (var op:Ennemis in ens.members) {
+				if (op != null){
+					add(op.pv);
+					add(op.shoot.group);
+				}
+			}
 			add(area);
 			add(ship.pv);
 			add(ship)
 			add(hb);
 			ships.add(ship);
 			add(ship.shoot.group);
-			add(en.shoot.group);
 			add(cur);
 			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.shoot.group.length.toString());
 			time.setFormat(null, 12, 0x044071);
@@ -81,7 +86,7 @@ package
 			ship.moveship(area, cur);
 			
 			//Collisions & tirs
-			FlxG.overlap(ship.shoot.group, en, hit);
+			FlxG.overlap(ship.shoot.group, ens, hit);
 			ship.shoot.fireAtMouse();
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)){

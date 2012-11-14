@@ -12,7 +12,7 @@ package
 	import flash.system.System;
     import flash.display.StageDisplayState;
     import flash.events.Event;
-	 
+	
 	/**
 	 * Menu state
 	 * @author 
@@ -40,8 +40,6 @@ package
 		public var dmg:int = 1;
 		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
 		public var config:Configs = new Configs(configs);
-		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
-		public var map:Map = new Map(mapfile);
 		
 		/**
 		 * Create the menu state
@@ -110,10 +108,10 @@ package
 				if ((op != null) && (op.exists == false)){
 					if (op.x == quite.x)
 						System.exit(0);
-					else if (op.x == optse.x)
+					if (op.x == optse.x)
 						FlxG.switchState(new Options());
-						else if (op.x == starte.x)
-							FlxG.switchState(new PlayState());	
+					if (op.x == starte.x)
+						FlxG.switchState(new PlayState());	
 					
 				}
 			}
