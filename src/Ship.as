@@ -21,6 +21,7 @@ package
 		public var pv:FlxBar;
 		public var life:int = 3;
 		public var shoot:FlxWeapon;
+		public var hb:Hitbox;
 		
 		public function Ship() 
 		{
