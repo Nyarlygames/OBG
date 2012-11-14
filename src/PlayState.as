@@ -23,10 +23,10 @@ package
 		public var ship:Ship;
 		public var area:Area;
 		public var hb:Hitbox;
+		public var coll:Collisions;
 		public var ens:FlxGroup = new FlxGroup();
 		public var explodes:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
-	//	public var en:Classique = new Classique(100, FlxG.width / 2, FlxG.height -100);
 		public var dmg:int = 1;
 		public var time:FlxText;
 		public var cur:Cursor = new Cursor();
@@ -49,7 +49,9 @@ package
 			map = new Map(mapfile, ship);
 			area = new Area(ship);
 			hb = new Hitbox(ship);
+			coll = new Collisions(this);
 			add(bg);
+			add(area);
 			ens = map.ens;
 			add(ens);
 			for each (var op:Ennemis in ens.members) {
@@ -58,10 +60,10 @@ package
 					add(op.shoot.group);
 				}
 			}
-			add(area);
 			add(ship.pv);
 			add(ship)
 			add(hb);
+			ship.hb = hb;
 			ships.add(ship);
 			add(ship.shoot.group);
 			add(cur);
@@ -88,13 +90,13 @@ package
 			ship.moveship(area, cur);
 			
 			//Collisions & tirs
-			FlxG.overlap(ship.shoot.group, ens, hit);
+			FlxG.overlap(ship.shoot.group, ens, coll.hit);
 			ship.shoot.fireAtMouse();
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)) {
 					op.behave();
-					FlxG.overlap(op.shoot.group, ship, damage);
-					FlxG.overlap(op, ship, collide);
+					FlxG.overlap(op.shoot.group, ship, coll.damage);
+					FlxG.overlap(op, ship, coll.collide);
 					op.shoot.fireAtTarget(hb);
 				}
 			}
@@ -106,44 +108,6 @@ package
 						explodes.remove(expl, true);
 					}
 			}
-		}
-		
-		// TOUCHE ENNEMIS
-		private function hit(bullet:FlxObject, target:Ennemis):void
-		{	
-			var explode:FlxSprite;
-			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ennemis))
-			{
-				target.hurt(dmg);
-				target.sound.play(); 
-				bullet.kill();
-				explode = target.mort();
-				explodes.add(explode);
-				add(explode);
-			}		
-		}
-		
-		// TOUCHE PAR ENNEMIS
-		private function damage(bullet:FlxObject, target:Ship):void
-		{
-			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ship))
-			{
-				target.hurt(dmg);
-				bullet.kill();
-				target.mort();
-			}			
-		}
-		
-		// Collisions
-		private function collide(touche:Ennemis, target:Ship):void
-		{
-			if (FlxCollision.pixelPerfectCheck(touche as Ennemis, target as Ship))
-			{
-				target.health = 0;
-				touche.health = 0;
-				touche.mort();
-				target.mort();
-			}			
 		}
 	}
 }
