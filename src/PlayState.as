@@ -94,6 +94,7 @@ package
 				if ((op != null) && (op.exists == true)) {
 					op.behave();
 					FlxG.overlap(op.shoot.group, ship, damage);
+					FlxG.overlap(op, ship, collide);
 					op.shoot.fireAtTarget(hb);
 				}
 			}
@@ -129,6 +130,18 @@ package
 			{
 				target.hurt(dmg);
 				bullet.kill();
+				target.mort();
+			}			
+		}
+		
+		// Collisions
+		private function collide(touche:Ennemis, target:Ship):void
+		{
+			if (FlxCollision.pixelPerfectCheck(touche as Ennemis, target as Ship))
+			{
+				target.health = 0;
+				touche.health = 0;
+				touche.mort();
 				target.mort();
 			}			
 		}
