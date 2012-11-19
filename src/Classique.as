@@ -1,7 +1,5 @@
 package  
 {
-	
-	import org.flixel.FlxObject;
 	import org.flixel.FlxSound;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.plugin.photonstorm.FlxDelay;
