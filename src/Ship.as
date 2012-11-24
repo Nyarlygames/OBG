@@ -15,7 +15,7 @@ package
 	public class Ship extends FlxSprite 
 	{
 		[Embed(source = '../assets/gfx/ship.png')] public var ImgShip:Class;
-		[Embed(source = '../assets/gfx/tir2.png')] public var ImgShoot:Class;
+		[Embed(source = '../assets/gfx/tir.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
 		public var to:FlxPoint = new FlxPoint();
 		public var maxtir:int = 250;

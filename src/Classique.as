@@ -15,7 +15,7 @@ package
 	{
 		
 		[Embed(source = '../assets/gfx/ennemis.png')] public var ImgClassic:Class;
-		[Embed(source = '../assets/gfx/tir.png')] public var ImgShoot:Class;
+		[Embed(source = '../assets/gfx/tir2.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
 		public var timer:FlxDelay = new FlxDelay(3500);
 		
