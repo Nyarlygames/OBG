@@ -17,6 +17,7 @@ package
 			super(FlxG.mouse.x , FlxG.mouse.y, ImgCursor);
 		}
 		
+		
 	}
 
 }

@@ -65,6 +65,7 @@ package
 			ship.hb = hb;
 			ships.add(ship);
 			add(ship.shoot.group);
+			//add(ship.shoot2.group);
 			add(cur);
 			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.shoot.group.length.toString());
 			time.setFormat(null, 12, 0x044071);
@@ -80,7 +81,7 @@ package
 			// Update textures & texte
 			area.sticktoship(ship);
 			hb.sticktoship(ship);
-			ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
+			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
 			time.text = "Vies : " + ship.life.toString();
 			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
 			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
@@ -90,7 +91,8 @@ package
 			
 			//Collisions & tirs
 			FlxG.overlap(ship.shoot.group, ens, coll.hit);
-			ship.shoot.fireAtMouse();
+			//ship.shoot.fireAtMouse();
+			//ship.shoot2.fireAtPosition(0,0);
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)) {
 					op.behave();
