@@ -51,6 +51,7 @@ package
 			}			
 		}
 		
+		// COLLISIONS
 		public function collide(touche:Ennemis, target:Ship):void
 		{
 			var explode:FlxSprite;

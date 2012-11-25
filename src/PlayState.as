@@ -63,10 +63,11 @@ package
 			add(ship)
 			add(hb);
 			ship.hb = hb;
+			ship.area = area;
 			ships.add(ship);
 			add(ship.shootgroup);
 			add(cur);
-			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "Temps : " + ship.shoot.group.length.toString());
+			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "");
 			time.setFormat(null, 12, 0x044071);
 			add(time);
 		}
@@ -86,12 +87,14 @@ package
 			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
 			
 			// Bouge le vaisseau
-			ship.moveship(area, cur);
+			ship.moveship();
 			
 			//Collisions & tirs
-			FlxG.overlap(ship.shoot.group, ens, coll.hit);
-			FlxG.overlap(ship.shoot2.group, ens, coll.hit);
-			FlxG.overlap(ship.shoot3.group, ens, coll.hit);
+			for each (var tirs:FlxGroup in ship.shootgroup.members) {
+				if ((tirs != null) && (tirs.exists == true)) {
+					FlxG.overlap(tirs, ens, coll.hit);
+				}
+			}
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)) {
 					op.behave();

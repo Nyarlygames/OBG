@@ -28,6 +28,7 @@ package
 		public var shoot2:FlxWeapon;
 		public var shoot3:FlxWeapon;
 		public var hb:Hitbox;
+		public var area:Area;
 		public var dmg:int = 1;
 		
 		public function Ship() 
@@ -56,7 +57,7 @@ package
 		}
 			
 		// Vaisseau bouge vers curseur
-		public function moveship(area:Area, cur:Cursor):void {
+		public function moveship():void {
 			if (FlxG.mouse.pressed()) {
 				to.x = FlxG.mouse.x - (this.x + this.frameWidth/2);
 				to.y = FlxG.mouse.y - (this.y + this.frameHeight / 2);
@@ -74,6 +75,7 @@ package
 			}
 		}
 		
+		// TIR ET ARRETE LE DEPLACEMENT
 		override public function update():void {
 			shoot2.fireFromAngle(angle -60);
 			shoot3.fireFromAngle(angle -120);
@@ -96,8 +98,7 @@ package
 				explosion.exists = true;
 				explosion.play("explode");
 				if (life == 0) {
-					exists = false;
-					pv.exists = false;
+					restart();
 				}
 				else {
 					health = 100;
@@ -108,6 +109,14 @@ package
 				return(explosion);
 			}
 			return (null);
+		}
+		
+		// PARTIE FINIE
+		public function restart():void {
+			area.exists = false;
+			hb.exists = false;
+			pv.exists = false;
+			exists = false;
 		}
 	}
 

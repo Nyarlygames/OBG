@@ -98,8 +98,7 @@ package
 			area.sticktoship(ship);	
 			
 			// Bouge le vaisseau
-			ship.moveship(area, cur);
-			ship.shoot.fireAtMouse();
+			ship.moveship();
 			
 			FlxG.overlap(ship.shoot.group, ens, hit);
 			
