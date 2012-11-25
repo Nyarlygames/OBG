@@ -23,9 +23,10 @@ package
 		public var maxtir:int = 250;
 		public var pv:FlxBar;
 		public var life:int = 3;
-		//public var shootgroup:FlxGroup = new FlxGroup();
+		public var shootgroup:FlxGroup = new FlxGroup();
 		public var shoot:FlxWeapon;
 		public var shoot2:FlxWeapon;
+		public var shoot3:FlxWeapon;
 		public var hb:Hitbox;
 		public var dmg:int = 1;
 		
@@ -41,46 +42,46 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot.setFireRate(2);
 			shoot.setBulletSpeed(300);
-			/*shoot2 = new FlxWeapon("shoot", this, "x", "y");
+			shoot2 = new FlxWeapon("shoot", this, "x", "y");
 			shoot2.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot2.setFireRate(10);
-			shoot2.setBulletSpeed(300);*/
-			/*shootgroup.add(shoot.group);
-			shootgroup.add(shoot2.group);*/
+			shoot2.setBulletSpeed(300);
+			shoot3 = new FlxWeapon("shoot", this, "x", "y");
+			shoot3.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
+			shoot3.setFireRate(10);
+			shoot3.setBulletSpeed(300);
+			shootgroup.add(shoot.group);
+			shootgroup.add(shoot2.group);
+			shootgroup.add(shoot3.group);
 		}
 			
 		// Vaisseau bouge vers curseur
 		public function moveship(area:Area, cur:Cursor):void {
-			if (FlxG.mouse.justPressed()) {
+			if (FlxG.mouse.pressed()) {
 				to.x = FlxG.mouse.x - (this.x + this.frameWidth/2);
 				to.y = FlxG.mouse.y - (this.y + this.frameHeight / 2);
 				dist.x = FlxG.mouse.x;
 				dist.y = FlxG.mouse.y;
-				if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
+				FlxVelocity.moveTowardsPoint(this, dist, 300);
+				/*if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 					(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
 					FlxVelocity.moveTowardsPoint(this, dist, 300);
 				}
 				if	(FlxCollision.pixelPerfectCheck(area, cur)) {
 					angle = FlxVelocity.angleBetween (this, cur, true ) +90;
 
-				}
+				}*/
 			}
 		}
 		
 		override public function update():void {
-			shoot.fireFromAngle(angle - 90);
-			//shoot.fireAtMouse();
+			shoot2.fireFromAngle(angle -60);
+			shoot3.fireFromAngle(angle -120);
+			shoot.fireAtMouse();
 			if ((FlxVelocity.distanceToPoint(this, dist) <= 10)) {
 				velocity.x = 0;
 				velocity.y = 0;
 			}
-			trace(FlxVelocity.distanceToPoint(this, dist));
-			/*for each (var tir:FlxWeapon in shootgroup.members) {
-				if (tir != null) {
-					tir.fireAtMouse();
-				}
-				trace(tir);
-			}*/
 		}
 		
 		// Mort du vaisseau
