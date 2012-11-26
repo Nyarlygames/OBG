@@ -20,13 +20,13 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>U:\OBG\src</path-element>
-      <path-element>U:\OBG\lib\flixel</path-element>
+      <path-element>C:\Users\Nyarly\Documents\GitHub\OBG\src</path-element>
+      <path-element>C:\Users\Nyarly\Documents\GitHub\OBG\lib\flixel</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>U:\OBG\src\OBG.as</path-element>
+    <path-element>C:\Users\Nyarly\Documents\GitHub\OBG\src\OBG.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
