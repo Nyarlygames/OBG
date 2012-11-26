@@ -81,6 +81,8 @@ package
 			add(ship);
 			add(cur);
 			add(ship.shoot.group);
+			ship.cur = cur;
+			ship.area = area;
 			title.setFormat(null, 16, 0xADAEAC);
 		}
 		

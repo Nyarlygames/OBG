@@ -29,6 +29,7 @@ package
 		public var shoot3:FlxWeapon;
 		public var hb:Hitbox;
 		public var area:Area;
+		public var cur:Cursor;
 		public var dmg:int = 1;
 		
 		public function Ship() 
@@ -67,11 +68,11 @@ package
 				/*if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 					(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
 					FlxVelocity.moveTowardsPoint(this, dist, 300);
-				}
+				}*/
 				if	(FlxCollision.pixelPerfectCheck(area, cur)) {
 					angle = FlxVelocity.angleBetween (this, cur, true ) +90;
 
-				}*/
+				}
 			}
 		}
 		

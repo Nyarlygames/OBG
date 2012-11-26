@@ -67,6 +67,7 @@ package
 			ships.add(ship);
 			add(ship.shootgroup);
 			add(cur);
+			ship.cur = cur;
 			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "");
 			time.setFormat(null, 12, 0x044071);
 			add(time);

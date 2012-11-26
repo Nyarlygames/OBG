@@ -1,0 +1,9 @@
+Cibles : HCG
+Type : Shoot'em UP
+
+UI : Score / Timer ? / Time / Vies / Sperma killcount ? / PV ? / Lvl
+
+Event EJAC
+
+Création "perso"
+Glaire -> tout droit meurt, déplacement en créneau
