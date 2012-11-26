@@ -1,4 +1,4 @@
 150
-Classic/40/600/800
-Bomber/20/400/400
-Classic/40/300/1200
+Classic/40/400/700
+Bomber/20/400/300
+Classic/40/300/800

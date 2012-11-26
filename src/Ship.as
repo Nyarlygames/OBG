@@ -64,14 +64,13 @@ package
 				to.y = FlxG.mouse.y - (this.y + this.frameHeight / 2);
 				dist.x = FlxG.mouse.x;
 				dist.y = FlxG.mouse.y;
-				FlxVelocity.moveTowardsPoint(this, dist, 300);
-				/*if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
+				//FlxVelocity.moveTowardsPoint(this, dist, 300);
+				if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 					(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
 					FlxVelocity.moveTowardsPoint(this, dist, 300);
-				}*/
-				if	(FlxCollision.pixelPerfectCheck(area, cur)) {
+				}
+				else if	(FlxCollision.pixelPerfectCheck(area, cur)) {
 					angle = FlxVelocity.angleBetween (this, cur, true ) +90;
-
 				}
 			}
 		}
@@ -89,7 +88,7 @@ package
 		
 		// Mort du vaisseau
 		public function mort():FlxSprite {
-			if (health == 0) {
+			if (health <= 0) {
 				var explosion:FlxSprite = new FlxSprite(x, y)
 				explosion.loadGraphic(Explode, true, false, 256, 128);
 				explosion.addAnimation("explode", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 15, true);

@@ -1,6 +1,8 @@
 package  
 {
 	import org.flixel.FlxState;
+	import org.flixel.FlxG;
+	import org.flixel.FlxGame;
 	
 	/**
 	 * Menu Options
@@ -10,7 +12,8 @@ package
 	{
 		
 		public function Options() 
-		{
+		{          
+
 		}
 		
 	}

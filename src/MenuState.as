@@ -45,10 +45,7 @@ package
 		 * Create the menu state
 		 */
 		override public function create():void
-		{	
-			FlxG.stage.displayState = StageDisplayState.FULL_SCREEN;
-			FlxG.width = config.width;
-			FlxG.height = config.height;
+		{
 			FlxG.bgColor = 0xaa4E4F4D;
 			os.x = 200;
 			os.y = 50;
