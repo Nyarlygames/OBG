@@ -17,12 +17,19 @@ package
 		public function Background() 
 		{
 			super(0, 0, ImgBG);
-			FlxScrollZone.add(this, new Rectangle(0, 0, this.width, this.height), 0, -2);
+			//FlxScrollZone.add(this, new Rectangle(0, 0, this.width, this.height), 0, -2, false);
+		}
+		
+		
+		override public function update():void
+		{
+			velocity.y = -50;
+			//trace(FlxScrollZone.getDrawMatrix(this, 0));
 		}
 		
 		override public function destroy():void
 		{
-			FlxScrollZone.clear();
+			//FlxScrollZone.clear();
 		}
 	}
 

@@ -7,3 +7,5 @@ Event EJAC
 
 Création "perso"
 Glaire -> tout droit meurt, déplacement en créneau
+
+PointG

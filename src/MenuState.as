@@ -91,7 +91,7 @@ package
 			super.update();
 			
 			// Update textures & texte
-			ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
+			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
 			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
 			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
 			area.sticktoship(ship);	

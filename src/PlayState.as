@@ -82,7 +82,7 @@ package
 			// Update textures & texte
 			area.sticktoship(ship);
 			hb.sticktoship(ship);
-			ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
+			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
 			time.text = "Vies : " + ship.life.toString();
 			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
 			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
@@ -98,7 +98,8 @@ package
 			}
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)) {
-					op.behave();
+					if ((FlxG.height - bg.y) > op.y)
+						op.behave();
 					coll.op = op;
 					FlxG.overlap(op.shoot.group, ship, coll.damage);
 					FlxG.overlap(op, ship, coll.collide);

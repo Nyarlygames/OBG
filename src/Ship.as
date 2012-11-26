@@ -79,7 +79,7 @@ package
 		override public function update():void {
 			shoot2.fireFromAngle(angle -60);
 			shoot3.fireFromAngle(angle -120);
-			shoot.fireAtMouse();
+			shoot.fireFromAngle(angle - 90);
 			if ((FlxVelocity.distanceToPoint(this, dist) <= 10)) {
 				velocity.x = 0;
 				velocity.y = 0;
@@ -89,7 +89,7 @@ package
 		// Mort du vaisseau
 		public function mort():FlxSprite {
 			if (health <= 0) {
-				var explosion:FlxSprite = new FlxSprite(x, y)
+				var explosion:FlxSprite = new FlxSprite(x, y);
 				explosion.loadGraphic(Explode, true, false, 256, 128);
 				explosion.addAnimation("explode", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 15, true);
 				explosion.exists = false;
