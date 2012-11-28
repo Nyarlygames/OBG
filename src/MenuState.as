@@ -56,7 +56,7 @@ package
 			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20, ship);
 			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20, ship);
 			quite = new MenusEnnemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20, ship);
-			title = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 200, 100, "Yet Another Shoot'em Up");;
+			title = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 200, 100, "Yet Another Shoot'em Up");
 			quite.x += quite.frameWidth / 2;
 			optse.x += optse.frameWidth / 2;
 			starte.x += starte.frameWidth / 2;

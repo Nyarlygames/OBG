@@ -27,11 +27,15 @@ package
 		public var ens:FlxGroup = new FlxGroup();
 		public var explodes:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
-		public var time:FlxText;
+		public var level:int = 1;
+		public var scoret:FlxText;
+		public var viest:FlxText;
+		public var niveaut:FlxText;
 		public var cur:Cursor = new Cursor();
 		public var bg:Background = new Background();
 		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
 		public var map:Map;
+		public var UI:FlxSprite;
 
 		
 		/**
@@ -52,6 +56,7 @@ package
 			coll = new Collisions(this);
 			add(bg);
 			add(area);
+			// ENNEMIS
 			ens = map.ens;
 			add(ens);
 			for each (var op:Ennemis in ens.members) {
@@ -60,6 +65,7 @@ package
 					add(op.shoot.group);
 				}
 			}
+			// VAISSEAU JOUEUR
 			add(ship.pv);
 			add(ship)
 			add(hb);
@@ -69,9 +75,18 @@ package
 			add(ship.shootgroup);
 			add(cur);
 			ship.cur = cur;
-			time = new FlxText(FlxG.width / 2 -50 , FlxG.height / 2 , 200, "");
-			time.setFormat(null, 12, 0x044071);
-			add(time);
+			// UI
+			UI = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height / 20, 0xaa4E4F4D, true);
+			add(UI);
+			scoret = new FlxText(20 , 0, FlxG.width /4, "");
+			scoret.setFormat(null, 16, 0xADAEAC);
+			niveaut = new FlxText(FlxG.width /4 ,0, FlxG.width /4, "");
+			niveaut.setFormat(null, 16, 0xADAEAC);
+			viest = new FlxText(FlxG.width * 2 / 4, 0 , FlxG.width * 2 /4, "");
+			viest.setFormat(null, 16, 0xADAEAC);
+			add(scoret);
+			add(viest);
+			add(niveaut);
 		}
 		
 		/**
@@ -85,13 +100,16 @@ package
 			};
 			
 			super.update();
-			// Update textures & texte
+			// TEXTURES
 			area.sticktoship(ship);
 			hb.sticktoship(ship);
-			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
-			time.text = "Vies : " + ship.life.toString();
 			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
 			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
+			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
+			// TEXTES
+			viest.text = "Vies : " + ship.life.toString();
+			scoret.text = "Score : " + ship.score;
+			niveaut.text = "Niveau : " + level;
 			
 			// Bouge le vaisseau
 			ship.moveship();

@@ -34,13 +34,13 @@ package
 					if (en != null) {
 						switch(en[0]){
 							case "Classic":
-								ens.add(new Classique(en[1], en[2], en[3], player));
+								ens.add(new Classique(en[1], en[2], en[3], en[4], player));
 							break;
 							case "Bomber":
-								ens.add(new Bomber(en[1], en[2], en[3], player));
+								ens.add(new Bomber(en[1], en[2], en[3], en[4], player));
 							break;
 							default:
-								ens.add(new Classique(en[1], en[2], en[3], player));
+								ens.add(new Classique(en[1], en[2], en[3], en[4], player));
 						}
 					}
 			}

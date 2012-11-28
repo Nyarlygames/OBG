@@ -18,10 +18,13 @@ package
 		[Embed(source = '../assets/gfx/tir2.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
 		public var timer:FlxDelay = new FlxDelay(5000);
+		public var ship:Ship;
 		
-		public function Classique(vie:int, x:int, y:int, ship:Ship) 
+		public function Classique(vie:int, x:int, y:int, value:int, player:Ship) 
 		{
 			super(x, y, ImgClassic, vie, ship);
+			ship = player;
+			score = value;
 			sound = new FlxSound();
 			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
@@ -60,6 +63,7 @@ package
 				explosion.exists = true;
 				explosion.play("explode");
 				this.exists = false;
+				ship.score += score;
 				return(explosion);
 			}
 			return(null);

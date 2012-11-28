@@ -24,6 +24,7 @@ package
 		public var maxtir:int = 250;
 		public var pv:FlxBar;
 		public var life:int = 3;
+		public var score:int = 0;
 		public var shootgroup:FlxGroup = new FlxGroup();
 		public var shoot:FlxWeapon;
 		public var shoot2:FlxWeapon;

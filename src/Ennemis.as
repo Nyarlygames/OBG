@@ -21,6 +21,7 @@ package
 		public var sound:FlxSound;
 		public var player:Ship;
 		public var dmg:int = 1;
+		public var score:int = 0;
 		
 		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
 		{

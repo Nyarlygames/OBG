@@ -13,11 +13,14 @@ package
 		[Embed(source = '../assets/gfx/bomber.png')] public var ImgBomber:Class;
 		[Embed(source = '../assets/gfx/tir3.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
+		public var ship:Ship;
 		
-		public function Bomber(vie:int, x:int, y:int, ship:Ship) 
+		public function Bomber(vie:int, x:int, y:int, value:int, player:Ship) 
 		{
 			super(x, y, ImgBomber, vie, ship);
 			sound = new FlxSound();
+			score = value;
+			ship = player;
 			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot.setFireRate(150);
@@ -26,7 +29,7 @@ package
 		}
 		
 		override public function behave():void {
-			FlxVelocity.moveTowardsObject(this, player);
+			FlxVelocity.moveTowardsObject(this, ship);
 		}
 		
 		override public function mort():FlxSprite {
@@ -43,6 +46,7 @@ package
 				explosion.exists = true;
 				explosion.play("explode");
 				this.exists = false;
+				ship.score += score;
 				return(explosion);
 			}
 			return(null);
