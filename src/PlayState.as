@@ -32,6 +32,7 @@ package
 		public var bg:Background = new Background();
 		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
 		public var map:Map;
+
 		
 		/**
 		 * CREATION DU JEU
@@ -78,6 +79,11 @@ package
 		 */
 		override public function update():void
 		{
+			
+			var applyangle:Function = function(tir:FlxObject, index:int, array:Array):void {
+				tir.angle = ship.angle;
+			};
+			
 			super.update();
 			// Update textures & texte
 			area.sticktoship(ship);
@@ -90,9 +96,12 @@ package
 			// Bouge le vaisseau
 			ship.moveship();
 			
+			
 			//Collisions & tirs
 			for each (var tirs:FlxGroup in ship.shootgroup.members) {
 				if ((tirs != null) && (tirs.exists == true)) {
+					
+					tirs.members.forEach(applyangle);
 					FlxG.overlap(tirs, ens, coll.hit);
 				}
 			}
@@ -101,6 +110,7 @@ package
 					if ((FlxG.height - bg.y) > op.y)
 						op.behave();
 					coll.op = op;
+					//op.shoot.group.members.forEach(applyangle_en);
 					FlxG.overlap(op.shoot.group, ship, coll.damage);
 					FlxG.overlap(op, ship, coll.collide);
 					op.shoot.fireAtTarget(hb);

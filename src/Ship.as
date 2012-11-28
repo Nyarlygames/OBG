@@ -7,6 +7,7 @@ package
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.plugin.photonstorm.FlxCollision;
 	import org.flixel.plugin.photonstorm.FlxBar;
+	import org.flixel.FlxObject;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	
 	/**
@@ -42,15 +43,15 @@ package
 			exists = true;
 			shoot = new FlxWeapon("shoot", this, "x", "y");
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
-			shoot.setFireRate(2);
+			shoot.setFireRate(100);
 			shoot.setBulletSpeed(300);
 			shoot2 = new FlxWeapon("shoot", this, "x", "y");
 			shoot2.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
-			shoot2.setFireRate(10);
+			shoot2.setFireRate(100);
 			shoot2.setBulletSpeed(300);
 			shoot3 = new FlxWeapon("shoot", this, "x", "y");
 			shoot3.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
-			shoot3.setFireRate(10);
+			shoot3.setFireRate(100);
 			shoot3.setBulletSpeed(300);
 			shootgroup.add(shoot.group);
 			shootgroup.add(shoot2.group);
@@ -110,6 +111,7 @@ package
 			}
 			return (null);
 		}
+		
 		
 		// PARTIE FINIE
 		public function restart():void {

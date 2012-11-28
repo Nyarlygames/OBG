@@ -25,7 +25,6 @@ package
 			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ennemis))
 			{
 				target.hurt(ps.ship.dmg);
-				target.sound.play(); 
 				bullet.kill();
 				explode = target.mort();
 				if (explode != null) {

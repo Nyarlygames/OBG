@@ -25,7 +25,7 @@ package
 		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
 		{
 			sound = new FlxSound();
-			sound.loadStream("../assets/sfx/menus.mp3", false, true);
+			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			player = ship;
 			super(x, y, ImgType);
 			immovable = true;

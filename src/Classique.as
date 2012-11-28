@@ -23,10 +23,10 @@ package
 		{
 			super(x, y, ImgClassic, vie, ship);
 			sound = new FlxSound();
-			sound.loadStream("../assets/sfx/tir.mp3", false, true);
+			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
-			shoot.setFireRate(10);
-			shoot.setBulletSpeed(300);
+			shoot.setFireRate(50);
+			shoot.setBulletSpeed(200);
 			dmg = 5;
 		}
 		
@@ -48,6 +48,8 @@ package
 		
 		override public function mort():FlxSprite {
 			if (health == 0) {
+				if (sound != null)
+					sound.play();
 				pv.exists = false;
 				var explosion:FlxSprite = new FlxSprite(x, y)
 				explosion.loadGraphic(Explode, true, false, 256, 128);

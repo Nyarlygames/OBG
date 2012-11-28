@@ -121,7 +121,6 @@ package
 			if (FlxCollision.pixelPerfectCheck(bullet as FlxSprite, target as Ennemis))
 			{
 				target.hurt(dmg);
-				target.sound.play();
 				bullet.kill();
 				target.mort();
 			}			
