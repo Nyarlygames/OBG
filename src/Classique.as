@@ -51,8 +51,9 @@ package
 		
 		override public function mort():FlxSprite {
 			if (health == 0) {
-				if (sound != null)
+				if (sound != null) { 
 					sound.play();
+				}
 				pv.exists = false;
 				var explosion:FlxSprite = new FlxSprite(x, y)
 				explosion.loadGraphic(Explode, true, false, 256, 128);
