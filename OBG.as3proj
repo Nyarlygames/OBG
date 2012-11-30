@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="GD\Présentation\Assets\OBG.swf" />
+    <movie path="bin\OBG.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />

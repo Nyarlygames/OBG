@@ -62,6 +62,7 @@ package
 		// Vaisseau bouge vers curseur
 		public function moveship():void {
 			if (FlxG.mouse.pressed()) {
+				//cur.droptarget();
 				to.x = FlxG.mouse.x - (this.x + this.frameWidth/2);
 				to.y = FlxG.mouse.y - (this.y + this.frameHeight / 2);
 				dist.x = FlxG.mouse.x;
