@@ -25,7 +25,6 @@ package
 			 * BORDER PIC
 			 * NB TRANSITION SCROLLING
 			 * TRANSITION : X Y VX VY
-			 * NB ENNEMIS
 			 * TYPEENNEMIS VIE X Y SCORE
 			 * BOSS
 			 * ...
@@ -44,8 +43,8 @@ package
 					switches.push(lignes[5 + x].split(' '));
 				}
 			}
-			var i:int = lignes[5 + x];
-			for (i += 4;  i < lignes.length; i++) {
+			switches.reverse();
+			for (var i:int = 5+x;  i < lignes.length; i++) {
 				if (lignes[i] != null)
 					en = lignes[i].split('/');
 					if (en != null) {

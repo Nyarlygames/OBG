@@ -47,6 +47,7 @@ package
 			// AJOUT DES OBJETS
 			ship = new Ship();
 			map = new Map(mapfile, ship);
+			bg.switches = map.switches;
 			area = new Area(ship);
 			hb = new Hitbox(ship);
 			coll = new Collisions(this);
