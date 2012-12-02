@@ -10,6 +10,11 @@ package
 	{
 		
 		public var ens:FlxGroup = new FlxGroup();
+		public var maxScore:int = 0;
+		public var id:int = 0;
+		public var bg:String = new String("");
+		public var borders:String = new String("");
+		public var switches:Array = new Array();
 		
 		// Crée le groupe d'ennemis à partir d'un fichier
 		
@@ -17,7 +22,11 @@ package
 			 * ID STAGE
 			 * MAXSCORE
 			 * BACKGROUND PICTURE
-			 * TYPEENNEMIS VIE X Y
+			 * BORDER PIC
+			 * NB TRANSITION SCROLLING
+			 * TRANSITION : X Y VX VY
+			 * NB ENNEMIS
+			 * TYPEENNEMIS VIE X Y SCORE
 			 * BOSS
 			 * ...
 		 * */
@@ -26,9 +35,17 @@ package
 			var fileContent:String = new map();
 			var lignes:Array = fileContent.split('\n');
 			var en:Array;
-			if (lignes != null) 
-				var maxScore:int = lignes[0];
-			for (var i:int = 1;  i < lignes.length; i++) {
+			if (lignes != null) {
+				id = lignes[0];
+				maxScore = lignes[1];
+				bg = lignes[2];
+				borders = lignes[3];
+				for (var x:int = 0; x < lignes[4]; x++) {
+					switches.push(lignes[5 + x].split(' '));
+				}
+			}
+			var i:int = lignes[5 + x];
+			for (i += 4;  i < lignes.length; i++) {
 				if (lignes[i] != null)
 					en = lignes[i].split('/');
 					if (en != null) {

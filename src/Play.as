@@ -28,14 +28,10 @@ package
 		public var explodes:FlxGroup = new FlxGroup();
 		public var ships:FlxGroup = new FlxGroup();
 		public var level:int = 1;
-		public var scoret:FlxText;
-		public var viest:FlxText;
-		public var niveaut:FlxText;
-		public var cur:Cursor;
 		public var bg:Background = new Background();
 		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
 		public var map:Map;
-		public var UI:FlxSprite;
+		public var ui:UI;
 
 		
 		/**
@@ -54,7 +50,7 @@ package
 			area = new Area(ship);
 			hb = new Hitbox(ship);
 			coll = new Collisions(this);
-			cur = new Cursor(area,ship);
+			ui = new UI(this);
 			add(bg);
 			add(bg.borders);
 			add(area);
@@ -75,19 +71,13 @@ package
 			ship.area = area;
 			ships.add(ship);
 			add(ship.shootgroup);
-			add(cur);
-			// UI
-			UI = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height / 20, 0xaa4E4F4D, true);
-			add(UI);
-			scoret = new FlxText(20 , 0, FlxG.width /4, "");
-			scoret.setFormat(null, 16, 0xADAEAC);
-			niveaut = new FlxText(FlxG.width /4 ,0, FlxG.width /4, "");
-			niveaut.setFormat(null, 16, 0xADAEAC);
-			viest = new FlxText(FlxG.width * 2 / 4, 0 , FlxG.width * 2 /4, "");
-			viest.setFormat(null, 16, 0xADAEAC);
-			add(scoret);
-			add(viest);
-			add(niveaut);
+			
+			//UI
+			
+			add(ui);
+			add(ui.scoret);
+			add(ui.viest);
+			add(ui.niveaut);
 		}
 		
 		/**
@@ -101,11 +91,6 @@ package
 			};
 			
 			super.update();
-			// TEXTES
-			viest.text = "Vies : " + ship.life.toString();
-			scoret.text = "Score : " + ship.score;
-			niveaut.text = "Niveau : " + level;
-			
 			
 			
 			//Collisions & tirs

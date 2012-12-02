@@ -32,16 +32,17 @@ package
 				ship.velocity.x = 0;
 				ship.velocity.y = 0;
 			}
-			if (FlxG.mouse.pressed()) {
+
 				to.x = FlxG.mouse.x - (ship.x + ship.frameWidth/2);
 				to.y = FlxG.mouse.y - (ship.y + ship.frameHeight / 2);
 				dist.x = FlxG.mouse.x;
 				dist.y = FlxG.mouse.y;
-				if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
-					(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
+				//if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
+				//	(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
+				if (!(FlxCollision.pixelPerfectCheck(this, ship))) {
 					FlxVelocity.moveTowardsPoint(ship, dist, ship.speed);
 				}
-			}
+
 		}
 	}
 
