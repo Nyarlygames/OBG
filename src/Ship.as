@@ -3,9 +3,6 @@ package
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxG;
-	import org.flixel.FlxPoint;
-	import org.flixel.plugin.photonstorm.FlxVelocity;
-	import org.flixel.plugin.photonstorm.FlxCollision;
 	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.FlxObject;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
@@ -19,8 +16,6 @@ package
 		[Embed(source = '../assets/gfx/ship.png')] public var ImgShip:Class;
 		[Embed(source = '../assets/gfx/tir.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
-		public var to:FlxPoint = new FlxPoint();
-		public var dist:FlxPoint = new FlxPoint();
 		public var maxtir:int = 250;
 		public var pv:FlxBar;
 		public var life:int = 3;
@@ -31,7 +26,6 @@ package
 		public var shoot3:FlxWeapon;
 		public var hb:Hitbox;
 		public var area:Area;
-		public var cur:Cursor;
 		public var dmg:int = 1;
 		
 		public function Ship() 
@@ -59,34 +53,12 @@ package
 			shootgroup.add(shoot3.group);
 		}
 			
-		// Vaisseau bouge vers curseur
-		public function moveship():void {
-			if (FlxG.mouse.pressed()) {
-				//cur.droptarget();
-				to.x = FlxG.mouse.x - (this.x + this.frameWidth/2);
-				to.y = FlxG.mouse.y - (this.y + this.frameHeight / 2);
-				dist.x = FlxG.mouse.x;
-				dist.y = FlxG.mouse.y;
-				//FlxVelocity.moveTowardsPoint(this, dist, 300);
-				if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
-					(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
-					FlxVelocity.moveTowardsPoint(this, dist, 300);
-				}
-				else if	(FlxCollision.pixelPerfectCheck(area, cur)) {
-					angle = FlxVelocity.angleBetween (this, cur, true ) +90;
-				}
-			}
-		}
 		
 		// TIR ET ARRETE LE DEPLACEMENT
 		override public function update():void {
 			shoot2.fireFromAngle(angle -60);
 			shoot3.fireFromAngle(angle -120);
 			shoot.fireFromAngle(angle - 90);
-			if ((FlxVelocity.distanceToPoint(this, dist) <= 10)) {
-				velocity.x = 0;
-				velocity.y = 0;
-			}
 		}
 		
 		// Mort du vaisseau

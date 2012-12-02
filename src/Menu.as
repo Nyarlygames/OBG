@@ -17,7 +17,7 @@ package
 	 * Menu state
 	 * @author 
 	 */
-	public class MenuState extends FlxState
+	public class Menu extends FlxState
 	{
 		public var title:FlxText;
 		public var start:FlxSprite;
@@ -34,12 +34,13 @@ package
 		public var starte:MenusEnnemis;
 		public var os:FlxPoint = new FlxPoint();
 		public var ship:Ship = new Ship();
-		public var cur:Cursor = new Cursor();
+		public var cur:Cursor;
 		public var area:Area = new Area(ship);
 		public var ens:FlxGroup = new FlxGroup();
 		public var dmg:int = 1;
 		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
 		public var config:Configs = new Configs(configs);
+		public var keys:KeyEvent;
 		
 		/**
 		 * Create the menu state
@@ -61,9 +62,9 @@ package
 			add(opts);
 			add(area);
 			add(ship);
+			cur = new Cursor(area, ship);
 			add(cur);
 			add(ship.shoot.group);
-			ship.cur = cur;
 			ship.area = area;
 			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20, ship);
 			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20, ship);
@@ -80,6 +81,8 @@ package
 			add(quite);
 			add(optse);
 			title.setFormat(null, 16, 0xADAEAC);
+			keys = new KeyEvent(ship);
+			add(keys);
 		}
 		
 		/**
@@ -88,15 +91,6 @@ package
 		override public function update():void
 		{
 			super.update();
-			
-			// Update textures & texte
-			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
-			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
-			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
-			area.sticktoship(ship);	
-			
-			// Bouge le vaisseau
-			ship.moveship();
 			
 			FlxG.overlap(ship.shoot.group, ens, hit);
 			
@@ -108,7 +102,7 @@ package
 					if (op.x == optse.x)
 						FlxG.switchState(new Options());
 					if (op.x == starte.x)
-						FlxG.switchState(new PlayState());	
+						FlxG.switchState(new Game());	
 					
 				}
 			}

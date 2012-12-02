@@ -11,16 +11,17 @@ package
 	public class Area extends FlxSprite 
 	{
 		[Embed(source = '../assets/gfx/area.png')] public var ImgArea:Class;
-
+		public var player:Ship;
 		
 		public function Area(ship:Ship) 
 		{
+			player = ship;
 			super(ship.x - ship.frameWidth / 2, ship.y - ship.frameHeight / 2, ImgArea);
 		}
 		
-		public function sticktoship(ship:Ship):void {
-			this.x = ship.x - (this.frameWidth - ship.frameWidth)/2;
-			this.y = ship.y - (this.frameHeight - ship.frameHeight)/2;
+		override public function update():void {
+			this.x = player.x - (this.frameWidth - player.frameWidth)/2;
+			this.y = player.y - (this.frameHeight - player.frameHeight)/2;
 		}
 		
 	}

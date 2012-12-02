@@ -11,14 +11,17 @@ package
 	{
 		
 		[Embed(source = '../assets/gfx/hitbox.png')] public var ImgHitbox:Class;
+		public var player:Ship;
+		
 		public function Hitbox(ship:Ship) 
 		{
+			player = ship;
 			super(ship.x - ship.frameWidth / 2, ship.y - ship.frameHeight / 2, ImgHitbox);
 		}
 		
-		public function sticktoship(ship:Ship):void {
-			this.x = ship.x - (this.frameWidth - ship.frameWidth)/2;
-			this.y = ship.y - (this.frameHeight - ship.frameHeight)/2;
+		override public function update():void {
+			this.x = player.x - (this.frameWidth - player.frameWidth)/2;
+			this.y = player.y - (this.frameHeight - player.frameHeight)/2;
 		}
 	}
 

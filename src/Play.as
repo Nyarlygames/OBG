@@ -14,10 +14,10 @@ package
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 
 	/**
-	 * Main game play state
+	 * Level
 	 * @author 
 	 */
-	public class PlayState extends FlxState
+	public class Play extends FlxState
 	{	
 		// VARIABLES DE PLAYSTATE
 		public var ship:Ship;
@@ -31,7 +31,7 @@ package
 		public var scoret:FlxText;
 		public var viest:FlxText;
 		public var niveaut:FlxText;
-		public var cur:Cursor = new Cursor();
+		public var cur:Cursor;
 		public var bg:Background = new Background();
 		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
 		public var map:Map;
@@ -41,7 +41,7 @@ package
 		/**
 		 * CREATION DU JEU
 		 */
-		override public function create():void
+		override public function Play():void
 		{
 			// Active le scrolling
 			if (FlxG.getPlugin(FlxScrollZone) == null)
@@ -54,6 +54,7 @@ package
 			area = new Area(ship);
 			hb = new Hitbox(ship);
 			coll = new Collisions(this);
+			cur = new Cursor(area,ship);
 			add(bg);
 			add(area);
 			// ENNEMIS
@@ -74,7 +75,6 @@ package
 			ships.add(ship);
 			add(ship.shootgroup);
 			add(cur);
-			ship.cur = cur;
 			// UI
 			UI = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height / 20, 0xaa4E4F4D, true);
 			add(UI);
@@ -100,19 +100,11 @@ package
 			};
 			
 			super.update();
-			// TEXTURES
-			area.sticktoship(ship);
-			hb.sticktoship(ship);
-			cur.x = FlxG.mouse.x - cur.frameWidth / 2;
-			cur.y = FlxG.mouse.y - cur.frameHeight / 2;
-			//ship.angle = FlxVelocity.angleBetween (ship, cur, true ) +90;
 			// TEXTES
 			viest.text = "Vies : " + ship.life.toString();
 			scoret.text = "Score : " + ship.score;
 			niveaut.text = "Niveau : " + level;
 			
-			// Bouge le vaisseau
-			ship.moveship();
 			
 			
 			//Collisions & tirs

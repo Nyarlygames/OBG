@@ -10,10 +10,10 @@ package
 	 */
 	public class Collisions extends FlxObject 
 	{
-		public var ps:PlayState;
+		public var ps:Play;
 		public var op:Ennemis;
 		
-		public function Collisions(play:PlayState) 
+		public function Collisions(play:Play) 
 		{
 			ps = play;
 		}

@@ -16,7 +16,7 @@ package
 		
 		public function OBG()
 		{
-			super(config.width, config.height, MenuState);
+			super(config.width, config.height, Menu);
 		}
 	}
 
