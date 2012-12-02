@@ -28,9 +28,6 @@ package
 			x = FlxG.mouse.x - frameWidth / 2;
 			y = FlxG.mouse.y - frameHeight / 2;
 			
-			
-			
-			
 			if ((FlxVelocity.distanceToPoint(ship, dist) <= 10)) {
 				ship.velocity.x = 0;
 				ship.velocity.y = 0;
@@ -42,7 +39,7 @@ package
 				dist.y = FlxG.mouse.y;
 				if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 					(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
-					FlxVelocity.moveTowardsPoint(ship, dist, 300);
+					FlxVelocity.moveTowardsPoint(ship, dist, ship.speed);
 				}
 			}
 		}

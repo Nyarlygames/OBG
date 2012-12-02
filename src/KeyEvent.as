@@ -3,6 +3,7 @@ package
 	
 	import org.flixel.FlxBasic;
 	import org.flixel.FlxG;
+	import flash.system.System;
 	
 	/**
 	 * ...
@@ -25,6 +26,8 @@ package
 			if (FlxG.keys.pressed("RIGHT")) {
 				player.angle += spinspeed;
 			}
+			if (FlxG.keys.pressed("ESCAPE"))
+				System.exit(0);
 		}
 		
 	}

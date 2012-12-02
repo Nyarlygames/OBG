@@ -24,6 +24,7 @@ package
 		public var shoot:FlxWeapon;
 		public var shoot2:FlxWeapon;
 		public var shoot3:FlxWeapon;
+		public var speed:int = 300;
 		public var hb:Hitbox;
 		public var area:Area;
 		public var dmg:int = 1;

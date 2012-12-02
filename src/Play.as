@@ -56,6 +56,7 @@ package
 			coll = new Collisions(this);
 			cur = new Cursor(area,ship);
 			add(bg);
+			add(bg.borders);
 			add(area);
 			// ENNEMIS
 			ens = map.ens;
@@ -126,6 +127,7 @@ package
 					op.shoot.fireAtTarget(hb);
 				}
 			}
+			coll.collide_borders(ship, bg.borders);
 			
 			for each (var expl:FlxSprite in explodes.members) {
 				if ((expl != null) && (expl.exists == true))

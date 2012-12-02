@@ -50,7 +50,7 @@ package
 			}			
 		}
 		
-		// COLLISIONS
+		// COLLISIONS ENNEMIS
 		public function collide(touche:Ennemis, target:Ship):void
 		{
 			var explode:FlxSprite;
@@ -71,6 +71,18 @@ package
 				}
 			}			
 		}
+		
+		// COLLISIONS BORDERS
+		public function collide_borders(ship:Ship, borders:FlxSprite):void
+		{
+			if (FlxCollision.pixelPerfectCheck(ship as Ship, borders as FlxSprite))
+				ship.speed = 150;
+			else
+				ship.speed = 300;
+		}
+		
+		
+		
 	}
 
 }
