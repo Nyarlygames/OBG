@@ -11,8 +11,7 @@ package
 	 */
 	public class OBG extends FlxGame
 	{
-		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
-		public var config:Configs = new Configs(configs);
+		public var config:Configs = new Configs();
 		
 		public function OBG()
 		{

@@ -15,6 +15,7 @@ package
 		public var cursor:Cursor;
 		public var state:int = 1;
 		public var onstate:Boolean = true;
+		public var config:Configs = new Configs();
 		/*
 		 * 1 = Choix de l'adn
 		 * 2 = Premier niveau

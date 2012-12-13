@@ -15,9 +15,13 @@ package
 	public class PickAdn extends FlxState 
 	{
 		public var choose_seed:FlxText;
-		public var seed1:FlxText = new FlxText(FlxG.width / 2, FlxG.height *3/ 15 , FlxG.width, "");
-		public var seed2:FlxText = new FlxText(FlxG.width / 2, FlxG.height *5/ 15 , FlxG.width, "");
-		public var seeds:int = 1;
+		public var seed1_label:FlxText = new FlxText(FlxG.width / 2 -100, FlxG.height *9/ 15 , FlxG.width, "M");
+		public var seed2_label:FlxText = new FlxText(FlxG.width / 2 -100, FlxG.height *10/ 15 , FlxG.width, "F");
+		public var seed1:FlxText = new FlxText(FlxG.width / 2, FlxG.height *9/ 15 , FlxG.width, "");
+		public var seed2:FlxText = new FlxText(FlxG.width / 2, FlxG.height *10/ 15 , FlxG.width, "");
+		public var ask_name:FlxText = new FlxText(FlxG.width / 2, FlxG.height/ 15 , FlxG.width, "What's the name ?");
+		public var username:FlxText = new FlxText(FlxG.width / 2, FlxG.height*2/ 15 , FlxG.width, "");
+		public var seeds:int = 0;
 		public var adn:Array = new Array("T", "A", "G", "C");
 		public var game:Game;
 		public var adns:FlxPoint = new FlxPoint(0,0);
@@ -29,12 +33,20 @@ package
 			game = jeu;
 			seed1.setFormat(null, 16, 0xADAEAC);
 			seed2.setFormat(null, 16, 0xADAEAC);
-			choose_seed = new FlxText(FlxG.width / 2 - 100, FlxG.height / 15 , FlxG.width, "Type a seed...");
+			seed1_label.setFormat(null, 16, 0xADAEAC);
+			seed2_label.setFormat(null, 16, 0xADAEAC);
+			ask_name.setFormat(null, 16, 0xADAEAC);
+			username.setFormat(null, 16, 0xADAEAC);
+			choose_seed = new FlxText(FlxG.width / 2 - 100, FlxG.height *7/ 15 , FlxG.width, "Type a seed...");
 			choose_seed.setFormat(null, 16, 0xADAEAC);
 			add(choose_seed);
 			add(seed1);
 			add(seed2);
-			img_player = new FlxSprite(0, 0, reg.assets[(adns.x % reg.adncount) + reg.adnindex]);
+			add(seed1_label);
+			add(seed2_label);
+			add(ask_name);
+			add(username);
+			img_player = new FlxSprite(0, FlxG.height/2, reg.assets[(adns.x % reg.adncount) + reg.adnindex]);
 			add(img_player);
 			
 		}
@@ -43,6 +55,9 @@ package
 			super.update();
 			img_player.loadGraphic(reg.assets[(adns.x % reg.adncount) + reg.adnindex]);
 			if (FlxG.keys.justReleased("BACKSPACE")) {
+				if ((seeds == 0) && (username.text.length > 0)) {
+					username.text = username.text.substr(0, username.text.length - 1);
+				}
 				if ((seeds == 1) && (seed1.text.length > 0)) {
 					adns.x -= int(seed1.text.toString().charCodeAt(seed1.text.length -1));
 					seed1.text = seed1.text.substr(0, seed1.text.length - 1);
@@ -53,20 +68,24 @@ package
 				}
 			}
 			else if (FlxG.keys.justReleased("ENTER")) {
-				if (seeds == 1)
-					seeds = 2; // choix seed 2
-				else {
+				if (seeds < 2)
+					seeds++;
+				else { 
+					game.config.name = username.text;
 					game.onstate = false;
 					exists = false;
 				}
 			}
 			else if (FlxG.keys.justReleased("ESCAPE")) {
-				if (seeds == 2)
-					seeds = 1;
+				if (seeds > 0)
+					seeds--;
 				else
 					FlxG.switchState(new Menu());
 			}
 			else if (FlxG.keys.justReleasedAny() > -1 ) {
+				if ((seeds == 0) && (seed2.text.length < 16) && (FlxG.keys.justReleasedAny() > 65) && (FlxG.keys.justReleasedAny() < 91)) {
+						username.text += String.fromCharCode((FlxG.keys.justReleasedAny() - 1));
+				}
 				if ((seeds == 1) && (seed1.text.length < 16)) {
 					if (String.fromCharCode((FlxG.keys.justReleasedAny() - 1)) == "G") {
 						seed1.text += "G";

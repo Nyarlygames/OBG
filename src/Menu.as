@@ -32,8 +32,7 @@ package
 		public var area:Area = new Area(ship);
 		public var ens:FlxGroup = new FlxGroup();
 		public var dmg:int = 1;
-		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
-		public var config:Configs = new Configs(configs);
+		public var config:Configs = new Configs();
 		public var keys:KeyEvent;
 		public var reg:ImgRegistry = new ImgRegistry();
 		
