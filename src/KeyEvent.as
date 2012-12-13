@@ -20,10 +20,10 @@ package
 		}
 		
 		override public function update():void {
-			if (FlxG.keys.pressed("LEFT")) {
+			if ((FlxG.keys.pressed("LEFT")) || (FlxG.keys.pressed("A"))) {
 				player.angle -= spinspeed;
 			}
-			if (FlxG.keys.pressed("RIGHT")) {
+			if ((FlxG.keys.pressed("RIGHT")) || (FlxG.keys.pressed("D"))) {
 				player.angle += spinspeed;
 			}
 			if (FlxG.keys.pressed("ESCAPE"))

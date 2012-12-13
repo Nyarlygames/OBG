@@ -37,7 +37,7 @@ package
 		/**
 		 * CREATION DU JEU
 		 */
-		override public function Play():void
+		public function Play():void
 		{
 			// Active le scrolling
 			if (FlxG.getPlugin(FlxScrollZone) == null)

@@ -183,5 +183,26 @@ package org.flixel.system.input
 			_lookup = null;
 			_map = null;
 		}
+		
+		
+		// This guy : https://github.com/AdamAtomic/flixel/pull/215/files
+		public function justReleasedAny():int
+		 {
+		   var i:uint = 0;
+			while(i < _total)
+			{
+				var o:Object = _map[i++];
+				if((o != null) && (o.current == -1))
+					return i;
+			}
+			return -1;
+		}
+		//~
+		public function getKeyName(KeyCode:uint):String
+		{ 
+			 var key:Object = _map[KeyCode];
+			return (key) ? key.name : "[key #" + KeyCode + "]";
+		}
+		//---------------------------------------------------------------
 	}
 }

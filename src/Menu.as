@@ -23,12 +23,6 @@ package
 		public var start:FlxSprite;
 		public var quit:FlxSprite;
 		public var opts:FlxSprite;
-		[Embed(source = '../assets/gfx/quitter.png')] public var ImgQuit:Class;
-		[Embed(source = '../assets/gfx/options.png')] public var ImgOpts:Class;
-		[Embed(source = '../assets/gfx/demarrer.png')] public var ImgStart:Class;
-		[Embed(source = '../assets/gfx/quittere.png')] public var ImgQuite:Class;
-		[Embed(source = '../assets/gfx/optionse.png')] public var ImgOptse:Class;
-		[Embed(source = '../assets/gfx/demarrere.png')] public var ImgStarte:Class;
 		public var optse:MenusEnnemis;
 		public var quite:MenusEnnemis;
 		public var starte:MenusEnnemis;
@@ -41,6 +35,7 @@ package
 		[Embed(source = "../options.cfg", mimeType = "application/octet-stream")] public var configs:Class;
 		public var config:Configs = new Configs(configs);
 		public var keys:KeyEvent;
+		public var reg:ImgRegistry = new ImgRegistry();
 		
 		/**
 		 * Create the menu state
@@ -51,9 +46,9 @@ package
 			os.x = 200;
 			os.y = 50;
 			// Ajout ennemis et titres
-			start = new FlxSprite(FlxG.width / 3 -os.x, FlxG.height /2, ImgStart);
-			quit = new FlxSprite(FlxG.width-os.x, FlxG.height /2, ImgQuit);
-			opts = new FlxSprite(FlxG.width * 2 / 3 -os.x, FlxG.height /2, ImgOpts);
+			start = new FlxSprite(FlxG.width / 3 -os.x, FlxG.height /2, reg.assets[4]);
+			quit = new FlxSprite(FlxG.width-os.x, FlxG.height /2, reg.assets[0]);
+			opts = new FlxSprite(FlxG.width * 2 / 3 -os.x, FlxG.height /2, reg.assets[2]);
 			title = new FlxText(FlxG.width / 2 - 100, FlxG.height / 15 , FlxG.width, "Let's make a baby together");
 			ship.shoot.setFireRate(100);
 			add(title);
@@ -66,9 +61,9 @@ package
 			add(cur);
 			add(ship.shoot.group);
 			ship.area = area;
-			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, ImgOptse, 20, ship);
-			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, ImgStarte, 20, ship);
-			quite = new MenusEnnemis(FlxG.width - os.x, FlxG.height / 2 +os.y, ImgQuite, 20, ship);
+			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, reg.assets[3], 20, ship);
+			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, reg.assets[5], 20, ship);
+			quite = new MenusEnnemis(FlxG.width - os.x, FlxG.height / 2 +os.y, reg.assets[1], 20, ship);
 			optse.x += optse.frameWidth / 2;
 			starte.x += starte.frameWidth / 2;
 			ens.add(starte);
