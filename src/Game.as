@@ -1,13 +1,16 @@
-package  
+package
 {
+	import flash.net.registerClassAlias;
 	import org.flixel.FlxState;
 	import org.flixel.FlxG;
+	import org.flixel.FlxSave;
 	
 	/**
 	 * Game
 	 * @author ...
 	 */
-	public class Game extends FlxState 
+	[Bindable]
+	public class Game extends FlxState
 	{
 		public var pickadn:PickAdn;
 		public var play:Play;
@@ -16,6 +19,7 @@ package
 		public var state:int = 1;
 		public var onstate:Boolean = true;
 		public var config:Configs = new Configs();
+		public var save:FlxSave = new FlxSave();
 		/*
 		 * 1 = Choix de l'adn
 		 * 2 = Premier niveau
@@ -28,6 +32,7 @@ package
 		
 		public function Game() 
 		{
+			registerClassAlias("Game", Game);
 			pickadn = new PickAdn(this);
 			add(pickadn);
 		}
@@ -45,8 +50,14 @@ package
 				state = 2;
 				onstate = true;
 			}
+			// SAUVEGUARDE
+			/*if (FlxG.keys.justReleased("S")) {
+				// Sauveguarde
+				save.bind("Game");
+				save.data.game = this ;
+				save.flush();
+			}*/
 		}
-		
 	}
 
 }

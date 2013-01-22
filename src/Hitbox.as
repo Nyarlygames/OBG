@@ -10,18 +10,19 @@ package
 	public class Hitbox extends FlxSprite 
 	{
 		
-		[Embed(source = '../assets/gfx/hitbox.png')] public var ImgHitbox:Class;
+		[Embed(source = '../assets/gfx/hitbox2.png')] public var ImgHitbox:Class;
 		public var player:Ship;
 		
 		public function Hitbox(ship:Ship) 
 		{
 			player = ship;
-			super(ship.x - ship.frameWidth / 2, ship.y - ship.frameHeight / 2, ImgHitbox);
+			super(ship.x , ship.y, ImgHitbox);
 		}
 		
 		override public function update():void {
-			this.x = player.x - (this.frameWidth - player.frameWidth)/2;
-			this.y = player.y - (this.frameHeight - player.frameHeight)/2;
+			this.x = player.x;
+			this.y = player.y;
+			angle = player.angle;
 		}
 	}
 

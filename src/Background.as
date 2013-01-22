@@ -31,7 +31,7 @@ package
 		{
 			borders.velocity.y = -50;
 			velocity.y = -50;
-			for (var i:int = 0; i < switches.length; i++) {
+			/*for (var i:int = 0; i < switches.length; i++) {
 				var source:String;
 				var clean:Array;
 				source = switches[0];
@@ -45,7 +45,7 @@ package
 					switches.pop();
 					trace(switches);
 				}
-			}
+			}*/
 			//trace(FlxScrollZone.getDrawMatrix(this, 0));
 		}
 		

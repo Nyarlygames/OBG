@@ -20,7 +20,7 @@ package
 		}
 		
 		override public function update():void {
-			if ((FlxG.keys.pressed("LEFT")) || (FlxG.keys.pressed("A"))) {
+			if ((FlxG.keys.pressed("LEFT")) || (FlxG.keys.pressed("Q"))) {
 				player.angle -= spinspeed;
 			}
 			if ((FlxG.keys.pressed("RIGHT")) || (FlxG.keys.pressed("D"))) {
@@ -28,6 +28,10 @@ package
 			}
 			if (FlxG.keys.pressed("ESCAPE"))
 				System.exit(0);
+				
+			// A VIRER
+			if (FlxG.keys.pressed("SPACE"))
+				FlxG.switchState(new Game());	
 		}
 		
 	}

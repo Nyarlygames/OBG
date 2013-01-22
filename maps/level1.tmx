@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="100" tilewidth="40" tileheight="30">
+ <objectgroup name="Ennemis" width="20" height="100">
+  <object type="Virus" x="119" y="443"/>
+  <object type="Virus" x="340" y="449"/>
+  <object type="Bactérie" x="528" y="293"/>
+  <object type="Bactérie" x="188" y="670"/>
+  <object type="Bactérie" x="485" y="682"/>
+  <object type="Bactérie" x="408" y="575"/>
+  <object type="Bactérie" x="200" y="960"/>
+  <object type="Virus" x="560" y="810"/>
+  <object type="Virus" x="120" y="900"/>
+  <object type="Bactérie" x="200" y="870"/>
+  <object type="Bactérie" x="480" y="870"/>
+  <object type="Bactérie" x="480" y="960"/>
+  <object type="Virus" x="120" y="1110"/>
+  <object type="Bactérie" x="200" y="1140"/>
+  <object type="Virus" x="560" y="1020"/>
+  <object type="Bactérie" x="480" y="1110"/>
+  <object type="Virus" x="320" y="1200"/>
+  <object type="Bactérie" x="400" y="1290"/>
+  <object type="Bactérie" x="200" y="1230"/>
+  <object type="Virus" x="320" y="1260"/>
+  <object type="Bactérie" x="440" y="1230"/>
+  <object type="Bactérie" x="240" y="1290"/>
+ </objectgroup>
+</map>

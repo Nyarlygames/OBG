@@ -17,6 +17,7 @@
   <classpaths>
     <class path="src" />
     <class path="lib\flixel" />
+    <class path="lib\tmx" />
   </classpaths>
   <!-- Build options -->
   <build>

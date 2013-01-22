@@ -43,7 +43,7 @@ package
 					switches.push(lignes[5 + x].split(' '));
 				}
 			}
-			switches.reverse();
+			switches.reverse();/*
 			for (var i:int = 5+x;  i < lignes.length; i++) {
 				if (lignes[i] != null)
 					en = lignes[i].split('/');
@@ -59,7 +59,7 @@ package
 								ens.add(new Classique(en[1], en[2], en[3], en[4], player));
 						}
 					}
-			}
+			}*/
 		}
 		
 	}

@@ -17,7 +17,7 @@ package
 		[Embed(source = '../assets/gfx/ennemis.png')] public var ImgClassic:Class;
 		[Embed(source = '../assets/gfx/tir2.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
-		public var timer:FlxDelay = new FlxDelay(5000);
+		public var timer:FlxDelay;
 		public var ship:Ship;
 		
 		public function Classique(vie:int, x:int, y:int, value:int, player:Ship) 
@@ -35,17 +35,22 @@ package
 		
 		override public function behave():void {
 			var back:FlxPoint = new FlxPoint;
-			timer.start();
+			
+			if (timer == null) {
+				timer = new FlxDelay(2000);
+				timer.start();
+			}
 			if (timer.hasExpired)
 			{
 				back.x = this.x;
 				back.y = FlxG.height + this.frameHeight +200;
-				FlxVelocity.moveTowardsPoint(this,back,150);
+				FlxVelocity.moveTowardsMouse(this, 30);
+				timer = null;
 			}
 			else {
 				back.x = this.x;
 				back.y = (FlxG.height / 5) * 3;
-				FlxVelocity.moveTowardsPoint(this, back, 1, 3000);
+				FlxVelocity.moveTowardsMouse(this, 20);
 			}
 		}
 		

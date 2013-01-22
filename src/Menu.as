@@ -2,6 +2,7 @@ package
 {
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxPoint;
+	import org.flixel.FlxSave;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
@@ -10,9 +11,6 @@ package
 	import org.flixel.FlxObject;
 	import org.flixel.plugin.photonstorm.FlxCollision;
 	import flash.system.System;
-    import flash.display.StageDisplayState;
-    import flash.events.Event;
-	
 	/**
 	 * Menu state
 	 * @author 
@@ -20,6 +18,7 @@ package
 	public class Menu extends FlxState
 	{
 		public var title:FlxText;
+		public var keyt:FlxText;
 		public var start:FlxSprite;
 		public var quit:FlxSprite;
 		public var opts:FlxSprite;
@@ -41,6 +40,7 @@ package
 		 */
 		override public function create():void
 		{
+			//[Embed(source = '../assets/fonts/Colleged.ttf',	fontFamily = "fontFamily", embedAsCFF = "false")] protected var	Font:Class;
 			FlxG.bgColor = 0xaa4E4F4D;
 			os.x = 200;
 			os.y = 50;
@@ -49,8 +49,11 @@ package
 			quit = new FlxSprite(FlxG.width-os.x, FlxG.height /2, reg.assets[0]);
 			opts = new FlxSprite(FlxG.width * 2 / 3 -os.x, FlxG.height /2, reg.assets[2]);
 			title = new FlxText(FlxG.width / 2 - 100, FlxG.height / 15 , FlxG.width, "Let's make a baby together");
+			
+			keyt = new FlxText(FlxG.width / 2 - 300, 2* FlxG.height / 15 , FlxG.width, "Q/LEFT pour orienter à gauche, D/DROIT pour orienter à droite.");
 			ship.shoot.setFireRate(100);
 			add(title);
+			add(keyt);
 			add(start);
 			add(quit);
 			add(opts);
@@ -75,6 +78,7 @@ package
 			add(quite);
 			add(optse);
 			title.setFormat(null, 16, 0xADAEAC);
+			keyt.setFormat(null, 16, 0xADAEAC);
 			keys = new KeyEvent(ship);
 			add(keys);
 		}
@@ -87,7 +91,7 @@ package
 			super.update();
 			
 			FlxG.overlap(ship.shoot.group, ens, hit);
-			
+
 			// Suivis vie des choix
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == false)){
@@ -95,11 +99,12 @@ package
 						System.exit(0);
 					if (op.x == optse.x)
 						FlxG.switchState(new Options());
-					if (op.x == starte.x)
-						FlxG.switchState(new Game());	
-					
+					if (op.x == starte.x) {
+						FlxG.switchState(new Game());
+					}
 				}
 			}
+			
 		}
 		
 		// TOUCHE ENNEMIS

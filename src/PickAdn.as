@@ -53,7 +53,7 @@ package
 		
 		override public function update():void {
 			super.update();
-			img_player.loadGraphic(reg.assets[(adns.x % reg.adncount) + reg.adnindex]);
+			img_player.loadGraphic(reg.assets[((adns.x + adns.y) % reg.adncount) + reg.adnindex]);
 			if (FlxG.keys.justReleased("BACKSPACE")) {
 				if ((seeds == 0) && (username.text.length > 0)) {
 					username.text = username.text.substr(0, username.text.length - 1);
@@ -83,7 +83,7 @@ package
 					FlxG.switchState(new Menu());
 			}
 			else if (FlxG.keys.justReleasedAny() > -1 ) {
-				if ((seeds == 0) && (seed2.text.length < 16) && (FlxG.keys.justReleasedAny() > 65) && (FlxG.keys.justReleasedAny() < 91)) {
+				if ((seeds == 0) && (username.text.length < 16) && (FlxG.keys.justReleasedAny() > 65) && (FlxG.keys.justReleasedAny() < 91)) {
 						username.text += String.fromCharCode((FlxG.keys.justReleasedAny() - 1));
 				}
 				if ((seeds == 1) && (seed1.text.length < 16)) {
