@@ -6,6 +6,9 @@ package
 	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.flixel.FlxSound;
+	import com.greensock.*;
+	import com.greensock.events.TweenEvent;
+	import com.greensock.easing.*;
 	
 	/**
 	 * Ennemis
@@ -22,6 +25,8 @@ package
 		public var player:Ship;
 		public var dmg:int = 1;
 		public var score:int = 0;
+		public var tw:TweenMax;
+
 		
 		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
 		{
@@ -34,6 +39,11 @@ package
 			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, this, "health",0 ,health);
 			pv.trackParent(0, -10);
 			shoot = new FlxWeapon("shoot", this, "x", "y");
+
+		}
+		
+		override public function update():void {
+			
 		}
 		
 		// Mort du vaisseau
@@ -44,9 +54,6 @@ package
 			}
 			return(null);
 		}
-		
-		public function behave():void {
-		}	
 	}
 
 }

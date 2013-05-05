@@ -33,6 +33,7 @@ package
 		{
 			super(FlxG.width / 2, 100, ImgShip);
 			immovable = true;
+		//	velocity.y = 100;
 			health = 100;
 			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, this, "health");
 			pv.trackParent(0, -30);

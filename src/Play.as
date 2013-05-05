@@ -1,8 +1,10 @@
 package
 {
+	import com.greensock.motionPaths.RectanglePath2D;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxG;
 	import org.flixel.FlxObject;
+	import org.flixel.FlxRect;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
@@ -84,8 +86,11 @@ package
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE,onTmxLoaded);
 			loader.load(new	URLRequest('../maps/level1.tmx'));
-			FlxG.stream("../assets/sfx/kine.mp3",0.3,true);
-
+			//FlxG.stream("../assets/sfx/kine.mp3",0.3,true);
+			FlxG.worldBounds = new FlxRect(0,0,800,3000);
+			FlxG.camera.setBounds(0,0,800,3000);
+			FlxG.camera.follow(ship);
+			FlxG.camera.bounds = new FlxRect(0, 0, 800, 3000);
 		}
 		
 		// LOAD MAP
@@ -107,9 +112,14 @@ package
 					case "Bactérie":
 						map.ens.add (new Classique(20, object.x, object.y, 10, ship));
 						break;
+					case "Aids":
+						map.ens.add (new Round(20, object.x, object.y, 10, ship));
+						break;
+					case "Herpes":
+						map.ens.add (new Herpes(20, object.x, object.y, 10, ship));
+						break;
 				}
 			}
-			
 			// ENNEMIS
 			ens = map.ens;
 			add(ens);
@@ -145,13 +155,11 @@ package
 			}
 			for each (var op:Ennemis in ens.members) {
 				if ((op != null) && (op.exists == true)) {
-					if ((FlxG.height - bg.y) > op.y)
-						op.behave();
+					//if ((FlxG.height - bg.y) > op.y)
+					//	op.behave();
 					coll.op = op;
-					//op.shoot.group.members.forEach(applyangle_en);
 					FlxG.overlap(op.shoot.group, ship, coll.damage);
 					FlxG.overlap(op, ship, coll.collide);
-					op.shoot.fireAtTarget(hb);
 				}
 			}
 			coll.collide_borders(ship, bg.borders);

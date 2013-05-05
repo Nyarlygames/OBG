@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="Virus" color="#25a423"/>
+ <objecttype name="Bactérie" color="#df2629"/>
+ <objecttype name="Aids" color="#67676a"/>
+ <objecttype name="Herpes" color="#ff7834"/>
+</objecttypes>

@@ -262,6 +262,7 @@ package org.flixel.plugin.photonstorm
 		 */
 		public static function angleBetween(a:FlxSprite, b:FlxSprite, asDegrees:Boolean = false):Number
         {
+
 			var dx:Number = (b.x + b.origin.x) - (a.x + a.origin.x);
 			var dy:Number = (b.y + b.origin.y) - (a.y + a.origin.y);
 			

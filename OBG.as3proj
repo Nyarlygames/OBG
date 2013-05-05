@@ -18,6 +18,7 @@
     <class path="src" />
     <class path="lib\flixel" />
     <class path="lib\tmx" />
+    <class path="lib\greensock" />
   </classpaths>
   <!-- Build options -->
   <build>

@@ -6,6 +6,7 @@ package
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
+	import org.flixel.FlxRect;
 	import org.flixel.plugin.photonstorm.FlxDelay;
 	/**
 	 * Ennemis de base
@@ -30,11 +31,13 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot.setFireRate(50);
 			shoot.setBulletSpeed(200);
+			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			dmg = 5;
 		}
 		
-		override public function behave():void {
-			var back:FlxPoint = new FlxPoint;
+		override public function update():void {
+			shoot.fireAtTarget(ship);
+			/*var back:FlxPoint = new FlxPoint;
 			
 			if (timer == null) {
 				timer = new FlxDelay(2000);
@@ -51,7 +54,7 @@ package
 				back.x = this.x;
 				back.y = (FlxG.height / 5) * 3;
 				FlxVelocity.moveTowardsMouse(this, 20);
-			}
+			}*/
 		}
 		
 		override public function mort():FlxSprite {

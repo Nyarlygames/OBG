@@ -23,13 +23,14 @@ package
 			ship = player;
 			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
-			shoot.setFireRate(150);
+			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
 			dmg = 20;
 		}
 		
-		override public function behave():void {
-			FlxVelocity.moveTowardsObject(this, ship);
+		override public function update():void {
+			shoot.fireAtTarget(ship);
+			//FlxVelocity.moveTowardsObject(this, ship);
 		}
 		
 		override public function mort():FlxSprite {

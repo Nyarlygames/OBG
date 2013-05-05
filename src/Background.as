@@ -29,8 +29,8 @@ package
 		
 		override public function update():void
 		{
-			borders.velocity.y = -50;
-			velocity.y = -50;
+			//borders.velocity.y = -50;
+			//velocity.y = -50;
 			/*for (var i:int = 0; i < switches.length; i++) {
 				var source:String;
 				var clean:Array;
