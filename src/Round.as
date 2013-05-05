@@ -6,6 +6,7 @@ package
 	import org.flixel.FlxSprite;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.flixel.FlxG;
+	import org.flixel.FlxRect;
 	/**
 	 * Ennemis Round
 	 * @author ...
@@ -42,75 +43,87 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
+			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot1 = new FlxWeapon("shoot", this, "x", "y");
 			shoot1.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot1.setFireRate(500);
 			shoot1.setBulletSpeed(200);
+			shoot1.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot2 = new FlxWeapon("shoot", this, "x", "y");
 			shoot2.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot2.setFireRate(500);
 			shoot2.setBulletSpeed(200);
+			shoot2.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot3 = new FlxWeapon("shoot", this, "x", "y");
 			shoot3.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot3.setFireRate(500);
 			shoot3.setBulletSpeed(200);
+			shoot3.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot4 = new FlxWeapon("shoot", this, "x", "y");
 			shoot4.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot4.setFireRate(500);
 			shoot4.setBulletSpeed(200);
+			shoot4.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			
 			shoot5 = new FlxWeapon("shoot", this, "x", "y");
 			shoot5.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot5.setFireRate(500);
 			shoot5.setBulletSpeed(200);
+			shoot5.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			
 			shoot6 = new FlxWeapon("shoot", this, "x", "y");
 			shoot6.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot6.setFireRate(500);
 			shoot6.setBulletSpeed(200);
+			shoot6.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			
 			shoot7 = new FlxWeapon("shoot", this, "x", "y");
 			shoot7.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot7.setFireRate(500);
 			shoot7.setBulletSpeed(200);
-			
-			
-			shoot7 = new FlxWeapon("shoot", this, "x", "y");
-			shoot7.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
-			shoot7.setFireRate(500);
-			shoot7.setBulletSpeed(200);
+			shoot7.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot8 = new FlxWeapon("shoot", this, "x", "y");
 			shoot8.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot8.setFireRate(500);
 			shoot8.setBulletSpeed(200);
+			shoot8.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot9 = new FlxWeapon("shoot", this, "x", "y");
 			shoot9.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot9.setFireRate(500);
 			shoot9.setBulletSpeed(200);
+			shoot9.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot10 = new FlxWeapon("shoot", this, "x", "y");
 			shoot10.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot10.setFireRate(500);
 			shoot10.setBulletSpeed(200);
+			shoot10.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot11 = new FlxWeapon("shoot", this, "x", "y");
 			shoot11.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot11.setFireRate(500);
 			shoot11.setBulletSpeed(200);
+			shoot11.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			
 			shoot12 = new FlxWeapon("shoot", this, "x", "y");
 			shoot12.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot12.setFireRate(500);
 			shoot12.setBulletSpeed(200);
+			shoot12.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot13 = new FlxWeapon("shoot", this, "x", "y");
+			shoot13.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
+			shoot13.setFireRate(500);
+			shoot13.setBulletSpeed(200);
+			shoot13.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			FlxG.state.add(shoot.group);
 			FlxG.state.add(shoot1.group);
 			FlxG.state.add(shoot2.group);
@@ -124,22 +137,27 @@ package
 			FlxG.state.add(shoot10.group);
 			FlxG.state.add(shoot11.group);
 			FlxG.state.add(shoot12.group);
+			FlxG.state.add(shoot13.group);
 			dmg = 20;
 		}
 		
 		override public function update():void {
-			shoot12.fireFromAngle(-180);
-			shoot1.fireFromAngle(-90);
-			shoot2.fireFromAngle(-0);
-			shoot3.fireFromAngle(90);
-			shoot4.fireFromAngle(-120);
-			shoot5.fireFromAngle(-60);
-			shoot6.fireFromAngle(60);
-			shoot7.fireFromAngle(120);
-			shoot8.fireFromAngle(-30);
-			shoot9.fireFromAngle(-150);
-			shoot10.fireFromAngle(300);
-			shoot11.fireFromAngle(150);
+			if (this.onScreen(FlxG.camera)){
+				shoot.fireAtTarget(ship);
+				shoot12.fireFromAngle(-180);
+				shoot1.fireFromAngle(-90);
+				shoot2.fireFromAngle(-0);
+				shoot3.fireFromAngle(90);
+				shoot4.fireFromAngle(-120);
+				shoot5.fireFromAngle(-60);
+				shoot6.fireFromAngle(60);
+				shoot7.fireFromAngle(120);
+				shoot8.fireFromAngle(-30);
+				shoot9.fireFromAngle(-150);
+				shoot10.fireFromAngle(300);
+				shoot11.fireFromAngle(150);
+				shoot13.fireFromAngle(30);
+			}
 			//FlxVelocity.moveTowardsObject(this, ship);
 		}
 		

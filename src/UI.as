@@ -1,5 +1,6 @@
 package  
 {
+	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
@@ -28,6 +29,10 @@ package
 			niveaut.setFormat(null, 16, 0xADAEAC);
 			viest = new FlxText(FlxG.width * 2 / 4, 0 , FlxG.width * 2 /4, "");
 			viest.setFormat(null, 16, 0xADAEAC);
+			scrollFactor = new FlxPoint(0, 0);
+			viest.scrollFactor = new FlxPoint(0, 0);
+			niveaut.scrollFactor = new FlxPoint(0, 0);
+			scoret.scrollFactor = new FlxPoint(0, 0);
 		}
 		
 		override public function update():void {

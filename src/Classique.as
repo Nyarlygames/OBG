@@ -36,7 +36,9 @@ package
 		}
 		
 		override public function update():void {
-			shoot.fireAtTarget(ship);
+			if (this.onScreen(FlxG.camera)){
+				shoot.fireAtTarget(ship);
+			}
 			/*var back:FlxPoint = new FlxPoint;
 			
 			if (timer == null) {

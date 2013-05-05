@@ -9,7 +9,7 @@ package
 	import com.greensock.*;
 	import com.greensock.events.TweenEvent;
 	import com.greensock.easing.*;
-
+	import org.flixel.FlxRect;
 	/**
 	 * Ennemis Herpes
 	 * @author ...
@@ -35,6 +35,7 @@ package
 			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			shoot = new FlxWeapon("shoot", this, "x", "y");
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
+			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
 			aoe = new FlxSprite(y, x, ImgAoe);
@@ -46,7 +47,9 @@ package
 		override public function update():void {
 			TweenMax.to(this, 2, { scaleX:1.5, scaleY:1.5, ease:Elastic.easeOut } );
 		//	TweenMax.fromTo(this, 1, {x:100}, {x:300, tint:0xFF0000});
-			shoot.fireAtTarget(ship);
+			if (this.onScreen(FlxG.camera)){
+				shoot.fireAtTarget(ship);
+			}
 			aoe.x = x-30;
 			aoe.y = y-30;
 		}

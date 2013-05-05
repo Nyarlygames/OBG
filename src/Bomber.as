@@ -3,6 +3,8 @@ package
 	import org.flixel.FlxSound;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.FlxSprite;
+	import org.flixel.FlxRect;
+	import org.flixel.FlxG;
 	/**
 	 * Ennemis Bomber
 	 * @author ...
@@ -25,11 +27,14 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
+			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			dmg = 20;
 		}
 		
 		override public function update():void {
-			shoot.fireAtTarget(ship);
+			if (this.onScreen(FlxG.camera)){
+				shoot.fireAtTarget(ship);
+			}
 			//FlxVelocity.moveTowardsObject(this, ship);
 		}
 		
