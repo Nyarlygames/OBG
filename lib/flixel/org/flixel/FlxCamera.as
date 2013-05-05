@@ -394,6 +394,11 @@ package org.flixel
 					helper = FlxU.max(width,height)/8;
 					deadzone = new FlxRect((width-helper)/2,(height-helper)/2,helper,helper);
 					break;
+				case 42:
+					var w2:Number = width/8;
+					var h2:Number = height;
+					deadzone = new FlxRect((width-w2)/2,-500,w2,h2);
+					break;
 				case STYLE_LOCKON:
 				default:
 					deadzone = null;

@@ -6,6 +6,9 @@ package
 	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.FlxObject;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
+	import org.flixel.FlxRect;
+	import org.flixel.plugin.photonstorm.FlxVelocity;
+	import org.flixel.FlxPoint;
 	
 	/**
 	 * Ship
@@ -28,6 +31,9 @@ package
 		public var hb:Hitbox;
 		public var area:Area;
 		public var dmg:int = 1;
+		public var to:FlxPoint = new FlxPoint(0, 0);
+		public var dist:FlxPoint = new FlxPoint(0, 0);
+		public var cam:Camera;
 		
 		public function Ship() 
 		{
@@ -42,14 +48,20 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot.setFireRate(100);
 			shoot.setBulletSpeed(300);
+			shoot.setBulletLifeSpan(2000);
+			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			shoot2 = new FlxWeapon("shoot", this, "x", "y");
 			shoot2.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot2.setFireRate(100);
+			shoot2.setBulletLifeSpan(2000);
 			shoot2.setBulletSpeed(300);
+			shoot2.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			shoot3 = new FlxWeapon("shoot", this, "x", "y");
 			shoot3.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot3.setFireRate(100);
 			shoot3.setBulletSpeed(300);
+			shoot3.setBulletLifeSpan(2000);
+			shoot3.setBulletBounds(new FlxRect(0, 0, 800, 3000));
 			shootgroup.add(shoot.group);
 			shootgroup.add(shoot2.group);
 			shootgroup.add(shoot3.group);
@@ -58,9 +70,33 @@ package
 		
 		// TIR ET ARRETE LE DEPLACEMENT
 		override public function update():void {
-			shoot2.fireFromAngle(angle -60);
-			shoot3.fireFromAngle(angle -120);
-			shoot.fireFromAngle(angle - 90);
+			if ((FlxVelocity.distanceToPoint(this, dist) <= 10)) {
+				velocity.x = 0;
+				velocity.y = 0;
+			}
+
+
+			to.x = FlxG.mouse.x - (x + frameWidth/2) -25;
+			to.y = FlxG.mouse.y - (y + frameHeight / 2) - 25;
+			if (cam != null) {
+				if (y - cam.y <= 0) {
+					velocity.x = 0;
+					velocity.y = 120;
+				}
+				else {
+					velocity.x = to.x;
+					velocity.y = to.y;
+				}
+			}
+
+			dist.x = FlxG.mouse.x;
+			dist.y = FlxG.mouse.y;
+			
+		//	if (FlxG.mouse.pressed()) {
+				shoot2.fireFromAngle(angle -60);
+				shoot3.fireFromAngle(angle -120);
+				shoot.fireFromAngle(angle - 90);
+		//	}
 		}
 		
 		// Mort du vaisseau

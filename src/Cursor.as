@@ -28,17 +28,7 @@ package
 			x = FlxG.mouse.x - frameWidth / 2;
 			y = FlxG.mouse.y - frameHeight / 2;
 			
-			if ((FlxVelocity.distanceToPoint(ship, dist) <= 10)) {
-				ship.velocity.x = 0;
-				ship.velocity.y = 0;
-			}
-
-				to.x = FlxG.mouse.x - (ship.x + ship.frameWidth/2);
-				to.y = FlxG.mouse.y - (ship.y + ship.frameHeight / 2);
-				ship.velocity.x = to.x;
-				ship.velocity.y = to.y;
-				dist.x = FlxG.mouse.x;
-				dist.y = FlxG.mouse.y;/*
+			/*
 				//if (((int(to.x) > int(area.frameWidth/2)) || (int(to.y) > int(area.frameHeight/2))) || (
 				//	(int(to.x) < -int(area.frameWidth/2)) || (int(to.y) < -int(area.frameHeight/2)))) {
 				if (!(FlxCollision.pixelPerfectCheck(this, ship))) {

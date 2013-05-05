@@ -39,6 +39,7 @@ package
 		public var level:int = 1;
 		public var bg:Background = new Background();
 		public var tilemap:FlxTilemap = new FlxTilemap();
+		public var mobile_cam:Camera;
 		//[Embed(source = '../assets/gfx/decor_tileset.png')] protected var ImgTileSet:Class;
 		[Embed(source = "../maps/map01.txt", mimeType = "application/octet-stream")] public var mapfile:Class;
 		public var map:Map;
@@ -76,21 +77,10 @@ package
 			ship.area = area;
 			ships.add(ship);
 			add(ship.shootgroup);
-			
-			//UI
-			
-			add(ui);
-			add(ui.scoret);
-			add(ui.viest);
-			add(ui.niveaut);
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE,onTmxLoaded);
 			loader.load(new	URLRequest('../maps/level1.tmx'));
 			//FlxG.stream("../assets/sfx/kine.mp3",0.3,true);
-			FlxG.worldBounds = new FlxRect(0,0,800,3000);
-			FlxG.camera.setBounds(0,0,800,3000);
-			FlxG.camera.follow(ship);
-			FlxG.camera.bounds = new FlxRect(0, 0, 800, 3000);
 		}
 		
 		// LOAD MAP
@@ -129,6 +119,19 @@ package
 					add(op.shoot.group);
 				}
 			}
+			mobile_cam = new Camera(0, 0, ship);
+			FlxG.worldBounds = new FlxRect(0,0,800,3000);
+			FlxG.camera.setBounds(0,0,800,3000);
+			FlxG.camera.follow(mobile_cam, 42);
+			ship.cam = mobile_cam;
+			FlxG.camera.bounds = new FlxRect(0, 0, 800, 3000);
+			
+			//UI
+			
+			add(ui);
+			add(ui.scoret);
+			add(ui.viest);
+			add(ui.niveaut);
 		}
 		
 		

@@ -57,6 +57,8 @@ package
 		override public function mort():FlxSprite {
 			if (health == 0) {
 				pv.exists = false;
+				aoe.exists = false;
+				aoe.destroy();
 				//if (sound != null)
 				//	sound.play();
 				var explosion:FlxSprite = new FlxSprite(x, y)

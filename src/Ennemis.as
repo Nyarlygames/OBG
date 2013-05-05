@@ -39,6 +39,7 @@ package
 			pv = new FlxBar(16, 64, FlxBar.FILL_LEFT_TO_RIGHT, 64, 4, this, "health",0 ,health);
 			pv.trackParent(0, -10);
 			shoot = new FlxWeapon("shoot", this, "x", "y");
+			shoot.setBulletLifeSpan(2000);
 
 		}
 		
