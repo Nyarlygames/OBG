@@ -46,6 +46,7 @@ package
 		//[Embed(source = '../assets/sfx/sfx.swf', symbol = 'ambient.wav')] public var Ambient:Class;
 		[Embed(source="../assets/sfx/kine.mp3")] private var SoundEffect:Class;
 		public var ui:UI;
+		[Embed(source="../maps/level1.tmx", mimeType="application/octet-stream")] private var mapTMX:Class;
 
 		
 		/**
@@ -97,16 +98,16 @@ package
 			for each(var object:TmxObject in group.objects) {
 				switch(object.type) {
 					case "Virus":
-						map.ens.add (new Bomber(10, object.x, object.y, 10, ship));
+						map.ens.add (new Bomber(10, object.x, object.y, 10, ship, new FlxPoint(50,0)));
 						break;
 					case "Bactérie":
-						map.ens.add (new Classique(20, object.x, object.y, 10, ship));
+						map.ens.add (new Classique(20, object.x, object.y, 10, ship, new FlxPoint(0, 50)));
 						break;
 					case "Aids":
-						map.ens.add (new Round(20, object.x, object.y, 10, ship));
+						map.ens.add (new Round(20, object.x, object.y, 10, ship, new FlxPoint(-50,0)));
 						break;
 					case "Herpes":
-						map.ens.add (new Herpes(20, object.x, object.y, 10, ship));
+						map.ens.add (new Herpes(20, object.x, object.y, 10, ship, new FlxPoint(0,-50)));
 						break;
 				}
 			}
@@ -119,12 +120,12 @@ package
 					add(op.shoot.group);
 				}
 			}
-			mobile_cam = new Camera(0, 0, ship);
-			FlxG.worldBounds = new FlxRect(0,0,800,3000);
-			FlxG.camera.setBounds(0,0,800,3000);
+			mobile_cam = new Camera(FlxG.width/2 , 0, ship);
+			FlxG.worldBounds = new FlxRect(0,0,8000,3000);
+			FlxG.camera.setBounds(0,0,8000,3000);
 			FlxG.camera.follow(mobile_cam, 42);
 			ship.cam = mobile_cam;
-			FlxG.camera.bounds = new FlxRect(0, 0, 800, 3000);
+			FlxG.camera.bounds = new FlxRect(0, 0, 8000, 3000);
 			
 			//UI
 			

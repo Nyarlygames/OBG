@@ -28,7 +28,7 @@ package
 			super(x, y);
 			sound = new FlxSound();
 			visible = false;
-			velocity.y = 50;
+			//velocity.y = 50;
 			ship = player;
 			FlxG.state.add(this);
 		}

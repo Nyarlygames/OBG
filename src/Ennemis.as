@@ -17,6 +17,10 @@ package
 	
 	public class Ennemis extends FlxSprite 
 	{
+		[Embed(source = '../assets/gfx/arrowright.png')] public var ImgArrowRIGHT:Class;
+		[Embed(source = '../assets/gfx/arrowleft.png')] public var ImgArrowLEFT:Class;
+		[Embed(source = '../assets/gfx/arrowup.png')] public var ImgArrowUP:Class;
+		[Embed(source = '../assets/gfx/arrowdown.png')] public var ImgArrowDOWN:Class;
 		public var to:FlxPoint;
 		public var pv:FlxBar;
 		public var maxtir:int = 20;
@@ -26,9 +30,10 @@ package
 		public var dmg:int = 1;
 		public var score:int = 0;
 		public var tw:TweenMax;
+		public var arrow:Arrows;
 
 		
-		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
+		public function Ennemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship, move:FlxPoint) 
 		{
 			sound = new FlxSound();
 			sound.loadStream("../assets/sfx/mort.mp3", false, true);
@@ -40,7 +45,23 @@ package
 			pv.trackParent(0, -10);
 			shoot = new FlxWeapon("shoot", this, "x", "y");
 			shoot.setBulletLifeSpan(2000);
-
+			switch (move.x) {
+					case -50:
+						arrow = new Arrows(x, y + 60, ImgArrowLEFT);
+						break;
+					case 50:
+						arrow = new Arrows(x, y + 60, ImgArrowRIGHT);
+						break;
+			}
+			switch (move.y) {
+					case -50:
+						arrow = new Arrows(x, y + 60, ImgArrowUP);
+						break;
+					case 50:
+						arrow = new Arrows(x, y + 60, ImgArrowDOWN);
+						break;
+			}
+			FlxG.state.add(arrow);
 		}
 		
 		override public function update():void {
@@ -52,6 +73,8 @@ package
 			if (health == 0) {
 				pv.exists = false;
 				this.exists = false;
+				arrow.exists = false;
+				FlxG.state.remove(arrow);
 			}
 			return(null);
 		}

@@ -27,7 +27,7 @@ package
 				player.angle += spinspeed;
 			}
 			if (FlxG.keys.pressed("ESCAPE"))
-				System.exit(0);
+				FlxG.switchState(new Game());
 				
 			// A VIRER
 			if (FlxG.keys.pressed("SPACE"))

@@ -17,6 +17,7 @@ package
 	public class Ship extends FlxSprite 
 	{
 		[Embed(source = '../assets/gfx/ship.png')] public var ImgShip:Class;
+		[Embed(source = '../assets/gfx/sperma.png')] public var ImgSperma:Class;
 		[Embed(source = '../assets/gfx/tir.png')] public var ImgShoot:Class;
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
 		public var maxtir:int = 250;
@@ -37,7 +38,10 @@ package
 		
 		public function Ship() 
 		{
-			super(FlxG.width / 2, 100, ImgShip);
+			super(FlxG.width / 2, 100);
+			loadGraphic(ImgSperma, true, false, 90, 90);
+			addAnimation("loop", [0, 1, 2, 3, 4, 5, 6], 10, true);
+			play("loop");
 			immovable = true;
 		//	velocity.y = 100;
 			health = 100;
@@ -49,19 +53,19 @@ package
 			shoot.setFireRate(100);
 			shoot.setBulletSpeed(300);
 			shoot.setBulletLifeSpan(2000);
-			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot2 = new FlxWeapon("shoot", this, "x", "y");
 			shoot2.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot2.setFireRate(100);
 			shoot2.setBulletLifeSpan(2000);
 			shoot2.setBulletSpeed(300);
-			shoot2.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot2.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot3 = new FlxWeapon("shoot", this, "x", "y");
 			shoot3.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot3.setFireRate(100);
 			shoot3.setBulletSpeed(300);
 			shoot3.setBulletLifeSpan(2000);
-			shoot3.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot3.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shootgroup.add(shoot.group);
 			shootgroup.add(shoot2.group);
 			shootgroup.add(shoot3.group);
@@ -70,7 +74,7 @@ package
 		
 		// TIR ET ARRETE LE DEPLACEMENT
 		override public function update():void {
-			if ((FlxVelocity.distanceToPoint(this, dist) <= 10)) {
+			if ((FlxVelocity.distanceToPoint(this, dist) <= 5)) {
 				velocity.x = 0;
 				velocity.y = 0;
 			}

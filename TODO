@@ -1,6 +1,8 @@
-- Différents ennemis/tirs
-- Spawn ennemis
+- Spawn ennemis => ennemis spawner
+- Transitions camera
+- Déplacement
 - IA
+- Différents ennemis/tirs
 - Game Over
 - Map editor / Path
 - Map Loader : http://www.switchonthecode.com/tutorials/adobe-air-and-flex-saving-serialized-objects-to-file Save Object.
@@ -10,7 +12,7 @@
 - Menus/Sous-menu
 - Options
 - Scrolling
-- Levels : http://fr.wikipedia.org/wiki/Spermatozo%C3%AFde Parkou sperma
+- Levels : http://fr.wikipedia.org/wiki/Spermatozo%C3%AFde Parkour sperma
 - Choix du ship (ADN/FORME/...)
 - Choix ovule
 - Event : jackpot multichoix.

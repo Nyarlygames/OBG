@@ -21,9 +21,9 @@ package
 		public var timer:FlxDelay;
 		public var ship:Ship;
 		
-		public function Classique(vie:int, x:int, y:int, value:int, player:Ship) 
+		public function Classique(vie:int, x:int, y:int, value:int, player:Ship, move:FlxPoint) 
 		{
-			super(x, y, ImgClassic, vie, ship);
+			super(x, y, ImgClassic, vie, ship, move);
 			ship = player;
 			score = value;
 			sound = new FlxSound();
@@ -31,7 +31,7 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth/2, frameHeight/2);
 			shoot.setFireRate(50);
 			shoot.setBulletSpeed(200);
-			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			dmg = 5;
 		}
 		
@@ -74,6 +74,8 @@ package
 				explosion.play("explode");
 				this.exists = false;
 				ship.score += score;
+				ship.cam.velocity.x = 0;
+				ship.cam.velocity.y = 200;
 				return(explosion);
 			}
 			return(null);

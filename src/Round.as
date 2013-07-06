@@ -1,6 +1,7 @@
 package  
 {
 	import org.flixel.FlxGroup;
+	import org.flixel.FlxPoint;
 	import org.flixel.FlxSound;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.FlxSprite;
@@ -32,9 +33,9 @@ package
 		public var shoot12:FlxWeapon;
 		public var shoot13:FlxWeapon;
 		
-		public function Round(vie:int, x:int, y:int, value:int, player:Ship) 
+		public function Round(vie:int, x:int, y:int, value:int, player:Ship, move:FlxPoint) 
 		{
-			super(x, y, ImgAids, vie, ship);
+			super(x, y, ImgAids, vie, ship, move);
 			sound = new FlxSound();
 			score = value;
 			ship = player;
@@ -43,20 +44,20 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
-			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			
 			shoot1 = new FlxWeapon("shoot", this, "x", "y");
 			shoot1.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot1.setFireRate(500);
 			shoot1.setBulletSpeed(200);
-			shoot1.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot1.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot1.setBulletLifeSpan(2000);
 			
 			shoot2 = new FlxWeapon("shoot", this, "x", "y");
 			shoot2.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot2.setFireRate(500);
 			shoot2.setBulletSpeed(200);
-			shoot2.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot2.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot2.setBulletLifeSpan(2000);
 			
 			shoot3 = new FlxWeapon("shoot", this, "x", "y");
@@ -70,7 +71,7 @@ package
 			shoot4.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot4.setFireRate(500);
 			shoot4.setBulletSpeed(200);
-			shoot4.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot4.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot4.setBulletLifeSpan(2000);
 			
 			
@@ -78,7 +79,7 @@ package
 			shoot5.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot5.setFireRate(500);
 			shoot5.setBulletSpeed(200);
-			shoot5.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot5.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot5.setBulletLifeSpan(2000);
 			
 			
@@ -86,7 +87,7 @@ package
 			shoot6.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot6.setFireRate(500);
 			shoot6.setBulletSpeed(200);
-			shoot6.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot6.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot6.setBulletLifeSpan(2000);
 			
 			
@@ -94,7 +95,7 @@ package
 			shoot7.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot7.setFireRate(500);
 			shoot7.setBulletSpeed(200);
-			shoot7.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot7.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot7.setBulletLifeSpan(2000);
 			
 			shoot8 = new FlxWeapon("shoot", this, "x", "y");
@@ -108,14 +109,14 @@ package
 			shoot9.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot9.setFireRate(500);
 			shoot9.setBulletSpeed(200);
-			shoot9.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot9.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot9.setBulletLifeSpan(2000);
 			
 			shoot10 = new FlxWeapon("shoot", this, "x", "y");
 			shoot10.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot10.setFireRate(500);
 			shoot10.setBulletSpeed(200);
-			shoot10.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot10.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot10.setBulletLifeSpan(2000);
 			
 			shoot11 = new FlxWeapon("shoot", this, "x", "y");
@@ -129,13 +130,13 @@ package
 			shoot12.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot12.setFireRate(500);
 			shoot12.setBulletSpeed(200);
-			shoot12.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot12.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot12.setBulletLifeSpan(2000);
 			shoot13 = new FlxWeapon("shoot", this, "x", "y");
 			shoot13.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot13.setFireRate(500);
 			shoot13.setBulletSpeed(200);
-			shoot13.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot13.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot13.setBulletLifeSpan(2000);
 			FlxG.state.add(shoot.group);
 			FlxG.state.add(shoot1.group);
@@ -189,6 +190,7 @@ package
 				explosion.play("explode");
 				this.exists = false;
 				ship.score += score;
+				ship.cam.velocity.x = -50;
 				return(explosion);
 			}
 			return(null);

@@ -1,5 +1,6 @@
 package  
 {
+	import org.flixel.FlxPoint;
 	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.FlxSprite;
 	/**
@@ -10,9 +11,9 @@ package
 	{
 		
 		
-		public function MenusEnnemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship) 
+		public function MenusEnnemis(x:int, y:int, ImgType:Class, vie:int, ship:Ship, move:FlxPoint) 
 		{
-			super(x, y, ImgType, vie, ship);
+			super(x, y, ImgType, vie, ship, move);
 		}
 		
 	}

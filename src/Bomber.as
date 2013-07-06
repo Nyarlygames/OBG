@@ -1,5 +1,6 @@
 package  
 {
+	import org.flixel.FlxPoint;
 	import org.flixel.FlxSound;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.FlxSprite;
@@ -17,9 +18,9 @@ package
 		[Embed(source = "../assets/gfx/explode.png")] private var Explode:Class;
 		public var ship:Ship;
 		
-		public function Bomber(vie:int, x:int, y:int, value:int, player:Ship) 
+		public function Bomber(vie:int, x:int, y:int, value:int, player:Ship, move:FlxPoint) 
 		{
-			super(x, y, ImgBomber, vie, ship);
+			super(x, y, ImgBomber, vie, ship, move);
 			sound = new FlxSound();
 			score = value;
 			ship = player;
@@ -27,7 +28,7 @@ package
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
 			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
-			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			dmg = 20;
 		}
 		
@@ -53,6 +54,7 @@ package
 				explosion.play("explode");
 				this.exists = false;
 				ship.score += score;
+				ship.cam.velocity.x = 50;
 				return(explosion);
 			}
 			return(null);

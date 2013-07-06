@@ -63,9 +63,9 @@ package
 			add(cur);
 			add(ship.shoot.group);
 			ship.area = area;
-			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, reg.assets[3], 20, ship);
-			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, reg.assets[5], 20, ship);
-			quite = new MenusEnnemis(FlxG.width - os.x, FlxG.height / 2 +os.y, reg.assets[1], 20, ship);
+			optse = new MenusEnnemis(FlxG.width * 2/ 3 -os.x, FlxG.height /2 +os.y, reg.assets[3], 20, ship, new FlxPoint(0,0));
+			starte = new MenusEnnemis(FlxG.width / 3 -os.x, FlxG.height /2 +os.y, reg.assets[5], 20, ship, new FlxPoint(0,0));
+			quite = new MenusEnnemis(FlxG.width - os.x, FlxG.height / 2 +os.y, reg.assets[1], 20, ship, new FlxPoint(0,0));
 			optse.x += optse.frameWidth / 2;
 			starte.x += starte.frameWidth / 2;
 			ens.add(starte);

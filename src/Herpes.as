@@ -1,6 +1,7 @@
 package  
 {
 	import org.flixel.FlxGroup;
+	import org.flixel.FlxPoint;
 	import org.flixel.FlxSound;
 	import org.flixel.plugin.photonstorm.FlxVelocity;
 	import org.flixel.FlxSprite;
@@ -26,16 +27,16 @@ package
 		public var scaleX:int = 1;
 		public var scaleY:int = 1;
 		
-		public function Herpes(vie:int, x:int, y:int, value:int, player:Ship) 
+		public function Herpes(vie:int, x:int, y:int, value:int, player:Ship, move:FlxPoint) 
 		{
-			super(x, y, ImgHerpes, vie, ship);
+			super(x, y, ImgHerpes, vie, ship, move);
 			sound = new FlxSound();
 			score = value;
 			ship = player;
 			sound.loadStream("../assets/sfx/mort.mp3", false, true);
 			shoot = new FlxWeapon("shoot", this, "x", "y");
 			shoot.makeImageBullet(maxtir, ImgShoot, frameWidth / 2, frameHeight / 2);
-			shoot.setBulletBounds(new FlxRect(0, 0, 800, 3000));
+			shoot.setBulletBounds(new FlxRect(0, 0, 8000, 3000));
 			shoot.setFireRate(500);
 			shoot.setBulletSpeed(200);
 			aoe = new FlxSprite(y, x, ImgAoe);
@@ -70,6 +71,7 @@ package
 				explosion.exists = true;
 				explosion.play("explode");
 				this.exists = false;
+				ship.cam.velocity.y = -50;
 				ship.score += score;
 				return(explosion);
 			}
